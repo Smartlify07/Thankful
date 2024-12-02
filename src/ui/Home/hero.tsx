@@ -7,7 +7,7 @@ const Hero = () => {
     navigate('/signup');
   };
   return (
-    <header className="flex flex-col gap-10 font-raleway px-3  mt-24 md:mt-0 md:px-0 items-center ">
+    <header className="flex flex-col gap-10 font-raleway px-3  my-auto md:mt-0 md:px-0 items-center ">
       <div className="envelope relative">
         <div className="top-[90px] absolute"></div>
       </div>
