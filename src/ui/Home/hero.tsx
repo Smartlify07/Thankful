@@ -7,12 +7,12 @@ const Hero = () => {
     navigate('/signup');
   };
   return (
-    <header className="flex flex-col gap-10 font-raleway px-3 md:px-0 items-center ">
+    <header className="flex flex-col gap-10 font-raleway px-3  mt-24 md:mt-0 md:px-0 items-center ">
       <div className="envelope relative">
         <div className="top-[90px] absolute"></div>
       </div>
       <div className="flex flex-col  gap-2 md:gap-5  items-center">
-        <h1 className="text-3xl text-center w-full md:w-full md:text-start  md:text-6xl font-semibold py-1 text-transparent bg-clip-text  bg-gradient-to-r from-warmorange to-pink-500   ">
+        <h1 className="text-3xl  text-center w-full md:w-full md:text-6xl font-semibold py-1 text-transparent bg-clip-text  bg-gradient-to-r from-warmorange to-pink-500   ">
           Spread the gratitude
         </h1>
         <p className="text-base md:text-2xl w-11/12 text-neutral-500 font-normal text-center">
