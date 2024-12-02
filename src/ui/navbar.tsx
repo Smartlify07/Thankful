@@ -8,9 +8,9 @@ const Navbar = () => {
       <div className="w-11/12 flex items-center justify-between">
         <Link
           to={'/'}
-          className="text-orange-500 font-medium font-playfair italic text-4xl "
+          className="text-warmorange font-medium font-playfair italic text-4xl "
         >
-          <img src={logo} alt="Logo" />
+          <img className="md:hidden" src={logo} alt="Logo" />
           <span className="hidden md:block">Thankful</span>
         </Link>
 
