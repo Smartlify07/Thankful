@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        warmorange: '#FFA500',
+        warmorange: '#ff4405',
         teal: '#008080',
         offwhite: '#F9F9F9',
       },

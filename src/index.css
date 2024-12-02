@@ -22,6 +22,7 @@ html {
   height: 90px; /* Reduced height */
   background-color: #fff;
   border: 1px solid #ddd;
+  border-top: 0px;
   border-radius: 8px;
   position: relative;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -36,7 +37,7 @@ html {
   border-style: solid;
   border-left: 75px solid transparent; /* Reduced left side of the triangle */
   border-right: 75px solid transparent; /* Reduced right side of the triangle */
-  border-bottom: 50px solid #f97316; /* Reduced height of the triangle */
+  border-bottom: 50px solid #ff4405; /* Reduced height of the triangle */
   top: 0;
   left: -1px;
   rotate: 180deg;
