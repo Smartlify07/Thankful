@@ -1,0 +1,70 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Playfair:ital,opsz,wght@0,5..1200,300..900;1,5..1200,300..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  overflow-x: hidden;
+}
+
+:root {
+  font-weight: 400;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.envelope {
+  width: 150px; /* Reduced width */
+  height: 90px; /* Reduced height */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  position: relative;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.envelope::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-left: 75px solid transparent; /* Reduced left side of the triangle */
+  border-right: 75px solid transparent; /* Reduced right side of the triangle */
+  border-bottom: 50px solid #f97316; /* Reduced height of the triangle */
+  top: 0;
+  left: -1px;
+  rotate: 180deg;
+  filter: drop-shadow(0 4px 4px rgba(0, 0, 0, 0.1));
+}
+
+.heart {
+  position: relative;
+  width: 20px; /* Reduced width */
+  height: 30px; /* Reduced height */
+}
+
+.heart:before,
+.heart:after {
+  position: absolute;
+  content: '';
+  left: 30px; /* Adjusted for the smaller size */
+  top: 0;
+  width: 30px; /* Reduced width */
+  height: 50px; /* Reduced height */
+  background: red;
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+
+.heart:after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
