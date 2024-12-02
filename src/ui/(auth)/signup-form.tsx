@@ -49,17 +49,17 @@ const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
 
   const errorClassName = 'text-xs font-normal font-raleway text-red-500 -mt-1';
   return (
-    <div className="w-full relative  self-start px-10 ">
+    <div className="w-full relative  self-start px-3 md:px-10 ">
       <button
         onClick={handleGoBack}
-        className="rounded-full w-10 h-10 border-2  items-center flex justify-center"
+        className="rounded-full w-10 h-10 border-2 mb-4 lg:mb-0  items-center flex justify-center"
       >
         <FaArrowLeftLong className="text-neutral-400" />
       </button>
-      <div className="w-[400px] relative max-w-[500px] border  m-auto py-7 px-5 z-[10000] ">
+      <div className="w-full lg:w-[400px] relative lg:max-w-[500px] border  m-auto py-7 px-5 z-[10000] ">
         <div
-          className="absolute w-[90%] h-full border-r-[10px] border-[#f0f0f0] border-opacity-80 border-b-[10px] border-teal-500 -z-[1000] 
-    translate-y-0 -bottom-2.5 translate-x-0 -right-2.5 "
+          className="hidden absolute w-[90%]  h-full border-r-[10px] border-[#f0f0f0] border-opacity-80 border-b-[10px] border-teal-500 -z-[1000] 
+    translate-y-0 -bottom-2.5 translate-x-0 -right-2.5 md:block"
         ></div>
         <Formik
           initialValues={initialValues}

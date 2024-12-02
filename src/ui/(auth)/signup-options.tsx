@@ -5,7 +5,7 @@ type SignupOptionsProps = {
 };
 const SignupOptions = ({ toggleSignUpForm }: SignupOptionsProps) => {
   return (
-    <div className="w-[400px] flex flex-col gap-6">
+    <div className="w-11/12  md:w-[400px] flex flex-col gap-6">
       <button className="bg-slate-950 rounded-full h-[60px] py-3 text-center font-medium text-white flex items-center justify-center gap-4">
         <FcGoogle size={30} /> Sign up with Google
       </button>
