@@ -4,15 +4,26 @@ export default {
   theme: {
     extend: {
       colors: {
-        warmorange: '#ff4405',
-        teal: '#008080',
-        offwhite: '#F9F9F9',
+        'apple-green': '#8fb339',
+        'yellow-green': '#b7ce63',
+        lime: '#C8EF3A',
+        'charcoal-gray': '#333',
+        'cal-poly-green': '#295135',
+        'outer-space': '#252525',
       },
       fontFamily: {
         inter: 'Inter, serif',
         poppins: 'Poppins, sans-serif',
         playfair: 'Playfair, serif',
+        'playfair-display': 'Playfair Display, serif',
         raleway: 'Raleway, sans-serif',
+        rubikk: 'Rubik, sans-serif',
+        playwrite: 'Playwrite HR Lijeva, serif',
+        openSans: 'Open Sans, sans-serif',
+      },
+
+      height: {
+        hero: 'calc(95vh - 80px)',
       },
     },
   },
