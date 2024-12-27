@@ -13,21 +13,23 @@ const Feature = ({
   highlightableTexts,
 }: FeatureProps) => {
   return (
-    <section className="grid-cols-1 min-h-[500px] w-full rounded-2xl border-warmorange py-10 px-5 flex gap-7 font-inter">
+    <section className="grid-cols-1 w-full rounded-2xl py-6 md:py-10 md:px-5 flex gap-7 font-inter md:min-h-[500px]">
       <div
-        className={`flex flex-col self-end pb-5 lg:w-1/2 gap-3 ${
+        className={`flex flex-col self-end md:pb-5 lg:w-1/2 gap-3 ${
           index % 2 !== 0 ? 'order-2' : 'order-1'
         }`}
       >
-        <h1 className="text-4xl font-normal  text-black">{header}</h1>
-        <p className="text-base">
+        <h1 className="text-3xl md:text-4xl font-normal  text-black">
+          {header}
+        </h1>
+        <p className="text-base text-[#999]">
           {description.split(' ').map((word, idx) => {
             const isHighlighted = highlightableTexts.includes(word);
             console.log(word);
             return isHighlighted ? (
               <span
                 key={idx}
-                className="italic font-playfair-display tracking-tight font-medium text-black px-2 py-0.5 rounded-sm text-center  bg-lime bg-opacity-40"
+                className="italic font-playfair-display tracking-tight font-medium text-[#444] px-2 py-0.5 rounded-sm text-center  "
               >
                 {word}{' '}
               </span>

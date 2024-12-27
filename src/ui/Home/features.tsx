@@ -5,7 +5,7 @@ const Features = () => {
   return (
     <section
       id="features"
-      className="flex flex-col  py-10 mt-10  px-10 justify-between items-start gap-7 font-inter"
+      className="flex flex-col px-6   justify-between font-inter items-start md:gap-7  md:py-10 md:mt-10  md:px-10 "
     >
       {featuresData.map((item, index) => (
         <Feature index={index} key={item.header} {...item} />

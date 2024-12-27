@@ -2,28 +2,28 @@ export const featuresData = [
   {
     header: 'Create Meaningful Messages in Seconds',
     description:
-      'Craft heartfelt thank-you messages effortlessly. Our intuitive platform helps you express gratitude with clarity and ease, so you can focus on making someone’s day brighter.',
+      'Effortlessly craft heartfelt thank-you messages with our intuitive platform, designed to help you express gratitude and brighten someone’s day.',
     icon: '⚡💌',
     highlightableTexts: ['heartfelt', 'gratitude', 'brighter'],
   },
   {
     header: 'Your Memories, Organized',
     description:
-      'Revisit your most cherished moments anytime. With our message library, every thank-you note is stored safely, ready for you to reflect on whenever you need.',
+      'Revisit cherished moments anytime with our secure message library, keeping every thank-you note ready for reflection.',
     icon: '✨📖',
     highlightableTexts: ['cherished', 'library', 'reflect'],
   },
   {
     header: 'The Right Words, Every Time',
     description:
-      'Struggling to find the right words? Let AI help you craft thoughtful, personalized messages that capture exactly how you feel.',
+      'Struggling with words? Let AI craft thoughtful, personalized messages that express exactly how you feel.',
     icon: '❣️📝',
     highlightableTexts: ['words', 'AI', 'thoughtful'],
   },
   {
     header: 'Make It Personal',
     description:
-      'Add a unique touch to your thank-you notes with customizable designs, fonts, and colors. Your message, your way.',
+      'Customize your thank-you notes with unique designs, fonts, and colors—your message, your way',
     icon: '🤗',
     highlightableTexts: ['unique', 'designs', 'message'],
   },
