@@ -14,7 +14,7 @@ const Hero = () => {
           Celebrate Life's Moments With{' '}
           <span className="italic text-lime md:text-inherit">Thankful</span>
         </h1>
-        <h2 className="text-[#888] text-center text-xl md:text-2xl font-normal  ">
+        <h2 className="text-[#666] text-center text-xl md:text-2xl font-normal  ">
           Send heartfelt messages that make memories last{' '}
           <span className="text--green">forever</span>.
         </h2>
