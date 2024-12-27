@@ -3,7 +3,7 @@ import * as motion from 'motion/react-client';
 import { MotionProps } from 'motion/react';
 
 interface ButtonProps extends MotionProps {
-  text: string;
+  text?: string;
   onClick?: () => void;
   children?: ReactNode;
   className?: string;

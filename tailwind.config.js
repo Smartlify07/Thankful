@@ -10,6 +10,7 @@ export default {
         'charcoal-gray': '#333',
         'cal-poly-green': '#295135',
         'outer-space': '#252525',
+        black: '#080708',
       },
       fontFamily: {
         inter: 'Inter, serif',
@@ -24,6 +25,7 @@ export default {
 
       height: {
         hero: 'calc(95vh - 80px)',
+        'hero-sm': 'calc(95vh - 120px)',
       },
     },
   },
