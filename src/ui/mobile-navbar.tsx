@@ -5,7 +5,7 @@ const MobileNavbar = ({ isOpen }: { isOpen: boolean }) => {
   const containerVariant: Variants = {
     visible: {
       height: '290px',
-      top: '0vh',
+      top: '0px',
       transition: {
         staggerChildren: 0.1,
         type: 'spring',
@@ -15,7 +15,7 @@ const MobileNavbar = ({ isOpen }: { isOpen: boolean }) => {
         when: 'beforeChildren',
       },
     },
-    hidden: { height: '0px', top: '-100vh' },
+    hidden: { height: '0px', top: '-1000px' },
   };
   const itemVariant: Variants = {
     visible: {
@@ -30,7 +30,7 @@ const MobileNavbar = ({ isOpen }: { isOpen: boolean }) => {
       animate={isOpen ? 'visible' : 'hidden'}
       initial={false}
       variants={containerVariant}
-      className={`w-full flex flex-col   z-10  py-5 px-5 text-2xl absolute font-medium bg-white rounded-b-lg shadow-md   text-outer-space backdrop:blur-xl md:hidden`}
+      className={`w-full flex flex-col z-10 nothing py-5 px-5 text-2xl absolute font-medium bg-white rounded-b-lg shadow-md   text-outer-space backdrop:blur-xl md:hidden`}
     >
       {['About', 'Features', 'Contact'].map((text, index) => (
         <motion.span
