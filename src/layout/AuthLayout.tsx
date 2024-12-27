@@ -1,26 +1,8 @@
 import { Outlet } from 'react-router';
-import authVid from '/public/videos/authvid-2.mp4';
 
 const AuthLayout = () => {
   return (
-    <main className="flex items-stretch h-screen font-poppins overflow-hidden">
-      <aside className="h-screen bg-orange-500 w-4/12 md:w-5/12 hidden md:flex items-center relative overflow-hidden">
-        <h1 className="text-white text-5xl -rotate-[30deg] z-10 top-14 left-5 font-playfair italic absolute font-medium">
-          Thankful
-        </h1>
-        <video
-          preload="auto"
-          className="h-full w-full object-cover relative"
-          autoPlay
-          loop
-          muted
-        >
-          <source src={authVid} type="video/mp4" />
-        </video>
-
-        <div className="absolute inset-0 bg-black bg-opacity-30"></div>
-      </aside>
-
+    <main className="flex justify-center bg-white items-center h-screen font-poppins overflow-hidden">
       <aside className="w-full md:w-7/12 lg:w-8/12 h-screen  flex items-center justify-center">
         <Outlet />
       </aside>

@@ -45,7 +45,7 @@ const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
   const labelClassName =
     'text-base font-normal text-slate-950 font-raleway tracking-[0.2px] text-gray-900';
   const inputClassName =
-    'border rounded-lg text-sm placeholder:text-sm py-3 px-3 font-raleway outline-none transition-all  focus:border-2 focus:border-teal';
+    'border border-[#444] rounded-lg text-sm placeholder:text-sm py-3 px-3 font-raleway outline-none transition-all  focus:border-2 focus:border-lime';
 
   const errorClassName = 'text-xs font-normal font-raleway text-red-500 -mt-1';
   return (
@@ -56,9 +56,9 @@ const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
       >
         <FaArrowLeftLong className="text-neutral-400" />
       </button>
-      <div className="w-full lg:w-[400px] relative lg:max-w-[500px] border  m-auto py-7 px-5 z-[10000] ">
+      <div className="w-full lg:w-[400px] bg-white relative lg:max-w-[500px] border m-auto py-7 px-5 z-[10000] ">
         <div
-          className="hidden absolute w-[90%]  h-full border-r-[10px] border-[#f0f0f0] border-opacity-80 border-b-[10px] border-teal-500 -z-[1000] 
+          className="hidden absolute w-[90%]  h-full border-r-[10px]  border-opacity-80 border-b-[10px] border-black -z-[1000] 
     translate-y-0 -bottom-2.5 translate-x-0 -right-2.5 md:block"
         ></div>
         <Formik
@@ -123,7 +123,7 @@ const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
               </div>
 
               <button
-                className="bg-orange-500  rounded-lg py-3 px-2  text-white font-bold font-raleway mt-4"
+                className="bg-lime rounded-lg py-3 px-2  text-black font-bold font-raleway mt-4"
                 type="submit"
                 disabled={isSubmitting}
               >
