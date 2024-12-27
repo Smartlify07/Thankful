@@ -22,7 +22,7 @@ const Feature = ({
         <h1 className="text-3xl md:text-4xl font-normal  text-black">
           {header} <span className="text-2xl md:hidden">{icon}</span>
         </h1>
-        <p className="text-base text-[#999]">
+        <p className="text-base text-[#555]">
           {description.split(' ').map((word, idx) => {
             const isHighlighted = highlightableTexts.includes(word);
             console.log(word);
