@@ -1,6 +1,5 @@
 import { CSSProperties, ReactNode } from 'react';
-import * as motion from 'motion/react-client';
-import { MotionProps } from 'motion/react';
+import { motion, MotionProps } from 'motion/react';
 
 interface ButtonProps extends MotionProps {
   text?: string;
@@ -10,7 +9,7 @@ interface ButtonProps extends MotionProps {
   style?: CSSProperties;
 }
 
-const Button: React.FC<ButtonProps> = ({
+const Button = ({
   text,
   onClick,
   children,
