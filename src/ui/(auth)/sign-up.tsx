@@ -13,7 +13,7 @@ const SignUp = () => {
           Already have an account?{' '}
         </p>
         <button
-          onClick={() => navigate('/sign-in')}
+          onClick={() => navigate('/signin')}
           className="text-sm text-black font-normal underline"
         >
           Sign in
