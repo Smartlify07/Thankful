@@ -40,7 +40,7 @@ const Feature = ({
         </p>
       </div>
       <div
-        className={`border-2  relative border-gray-100  min-h-full hidden  items-center justify-center md:flex rounded-2xl w-1/2 ${
+        className={`border-lime border-2 relative min-h-full hidden items-center justify-center md:flex rounded-2xl w-1/2 ${
           index % 2 !== 0 ? 'order-1' : 'order-2'
         }`}
       >

@@ -1,27 +1,23 @@
 import { Outlet } from 'react-router';
-import authVid from '/public/videos/authvid-2.mp4';
+import authImage from '/public/images/auth-bg.jpg';
 
 const AuthLayout = () => {
   return (
     <main className="flex items-stretch h-screen font-poppins overflow-hidden">
-      <aside className="h-screen bg-orange-500 w-4/12 md:w-5/12 hidden md:flex items-center relative overflow-hidden">
-        <h1 className="text-white text-5xl -rotate-[30deg] z-10 top-14 left-5 font-playfair italic absolute font-medium">
-          Thankful
+      <aside className="h-screen bg-orange-500 hidden items-center relative overflow-hidden md:w-6/12 md:flex ">
+        <h1 className="text-white text-5xl z-10 bottom-20 left-5 font-inter tracking-tight absolute font-medium">
+          Start creating those heartfelt thank you messages today!
         </h1>
-        <video
-          preload="auto"
-          className="h-full w-full object-cover relative"
-          autoPlay
-          loop
-          muted
-        >
-          <source src={authVid} type="video/mp4" />
-        </video>
+        <img
+          src={authImage}
+          className="h-full w-full object-cover"
+          alt="Someone writing a thank you message"
+        />
 
         <div className="absolute inset-0 bg-black bg-opacity-30"></div>
       </aside>
 
-      <aside className="w-full md:w-7/12 lg:w-8/12 h-screen  flex items-center justify-center">
+      <aside className="w-full md:w-7/12 lg:w-6/12 h-screen  flex items-center justify-center">
         <Outlet />
       </aside>
     </main>
