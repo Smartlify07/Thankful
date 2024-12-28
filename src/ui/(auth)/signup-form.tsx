@@ -1,12 +1,6 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FormValues } from '../../types/types';
-import { FaArrowLeftLong } from 'react-icons/fa6';
-import React, { Dispatch } from 'react';
-
-type SignupFormProps = {
-  setSignupWithEmail: Dispatch<React.SetStateAction<boolean>>;
-};
 
 const signupSchema = Yup.object().shape({
   name: Yup.string()
@@ -28,7 +22,7 @@ const signupSchema = Yup.object().shape({
     .required(`Password can't be blank`),
 });
 
-const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
+const SignupForm = () => {
   const initialValues = {
     name: '',
     email: '',
@@ -38,29 +32,19 @@ const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
   const handleSubmit = (values: FormValues) => {
     console.log('Form Submitted', values);
   };
-  const handleGoBack = () => {
-    setSignupWithEmail(false);
-  };
 
   const labelClassName =
-    'text-base font-normal text-slate-950 font-raleway tracking-[0.2px] text-gray-900';
+    'text-base font-normal text-slate-950 font-inter text-gray-900';
   const inputClassName =
-    'border border-[#444] rounded-lg text-sm placeholder:text-sm py-3 px-3 font-raleway outline-none transition-all  focus:border-2 focus:border-lime';
+    'border border-outer-space rounded-lg text-sm placeholder:text-sm py-3 px-3 font-inter outline-none transition-all focus:border-2 focus:border-lime';
 
-  const errorClassName = 'text-xs font-normal font-raleway text-red-500 -mt-1';
+  const errorClassName = 'text-xs font-normal font-poppins text-red-500 -mt-1';
   return (
-    <div className="w-full relative  self-start px-3 md:px-10 ">
-      <button
-        onClick={handleGoBack}
-        className="rounded-full w-10 h-10 border-2 mb-4 lg:mb-0  items-center flex justify-center"
-      >
-        <FaArrowLeftLong className="text-neutral-400" />
-      </button>
-      <div className="w-full lg:w-[400px] bg-white relative lg:max-w-[500px] border m-auto py-7 px-5 z-[10000] ">
-        <div
-          className="hidden absolute w-[90%]  h-full border-r-[10px]  border-opacity-80 border-b-[10px] border-black -z-[1000] 
-    translate-y-0 -bottom-2.5 translate-x-0 -right-2.5 md:block"
-        ></div>
+    <div className="w-full relative border  self-start px-3 md:px-10 ">
+      <div className="flex flex-col gap-6 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
+        <h1 className="text-outer-space text-3xl font-medium font-inter">
+          Sign up
+        </h1>
         <Formik
           initialValues={initialValues}
           validationSchema={signupSchema}
@@ -123,11 +107,11 @@ const SignupForm = ({ setSignupWithEmail }: SignupFormProps) => {
               </div>
 
               <button
-                className="bg-lime rounded-lg py-3 px-2  text-black font-bold font-raleway mt-4"
+                className="bg-lime rounded-lg py-2.5 px-2  text-outer-space font-semibold font-inter mt-4"
                 type="submit"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? 'Submitting...' : 'Sign Up'}
+                {isSubmitting ? 'Submitting...' : 'Sign up'}
               </button>
             </Form>
           )}
