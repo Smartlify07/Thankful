@@ -1,6 +1,9 @@
+import { FcGoogle } from 'react-icons/fc';
+
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { FormValues } from '../../types/types';
+import Button from '../button';
 
 const signupSchema = Yup.object().shape({
   name: Yup.string()
@@ -40,9 +43,9 @@ const SignupForm = () => {
 
   const errorClassName = 'text-xs font-normal font-poppins text-red-500 -mt-1';
   return (
-    <div className="w-full relative border  self-start px-3 md:px-10 ">
-      <div className="flex flex-col gap-6 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
-        <h1 className="text-outer-space text-3xl font-medium font-inter">
+    <div className="w-full relative self-start px-3 md:px-10 ">
+      <div className="flex flex-col gap-4 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
+        <h1 className="text-outer-space mb-1 text-3xl font-medium font-inter">
           Sign up
         </h1>
         <Formik
@@ -107,7 +110,7 @@ const SignupForm = () => {
               </div>
 
               <button
-                className="bg-lime rounded-lg py-2.5 px-2  text-outer-space font-semibold font-inter mt-4"
+                className="bg-lime rounded-md py-2.5 px-2  text-outer-space font-semibold font-inter mt-4"
                 type="submit"
                 disabled={isSubmitting}
               >
@@ -116,6 +119,19 @@ const SignupForm = () => {
             </Form>
           )}
         </Formik>
+        <div className="flex flex-col gap-4">
+          <div className="flex items-center gap-1">
+            <hr className="border-[0.5px] w-6/12 border-neutral-200" />
+            <p className="text-center text-neutral-400 text-sm">OR</p>
+            <hr className="border w-6/12 border-neutral-200" />
+          </div>
+          <Button
+            text="Sign up with google"
+            className="flex border justify-center flex-row-reverse font-inter font-semibold text-black items-center gap-2 py-2.5 px-4 text-center rounded-md"
+          >
+            <FcGoogle size={20} />
+          </Button>
+        </div>
       </div>
     </div>
   );

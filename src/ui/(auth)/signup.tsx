@@ -5,7 +5,7 @@ const SignUp = () => {
     <div className="rounded-xl w-full  flex flex-col items-center px-2 py-5 ">
       <SignupForm />
 
-      <div className="flex items-center gap-2 mt-10">
+      <div className="flex items-center gap-2 mt-5">
         <p className="text-sm  text-center text-[#555] font-normal">
           Already have an account?{' '}
         </p>
