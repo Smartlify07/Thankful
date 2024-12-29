@@ -11,12 +11,12 @@ import { signupSchema } from '../../validation/authValidationSchema';
 const SignupForm = () => {
   const dispatch: AppDispatch = useDispatch();
   const initialValues = {
+    name: '',
     email: '',
     password: '',
   };
 
   const handleSignUp = async (values: FormValues): Promise<void> => {
-    console.log('Submitting form', values);
     await dispatch(signup(values)).unwrap();
   };
 
@@ -38,6 +38,23 @@ const SignupForm = () => {
           onSubmit={handleSignUp}
         >
           <Form className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+              <label className={labelClassName} htmlFor="email">
+                Name
+              </label>
+              <Field
+                type="text"
+                name="name"
+                id="name"
+                placeholder="E.g John Doe"
+                className={inputClassName}
+              />
+              <ErrorMessage
+                name="name"
+                component="p"
+                className={errorClassName}
+              />
+            </div>
             <div className="flex flex-col gap-2">
               <label className={labelClassName} htmlFor="email">
                 Email
