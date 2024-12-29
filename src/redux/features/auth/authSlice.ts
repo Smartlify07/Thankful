@@ -4,12 +4,7 @@ import { account, ID } from '../../../../appwrite/appwriteConfig';
 
 export const signup = createAsyncThunk('auth/signup', async (user: User) => {
   try {
-    const newUser = await account.create(
-      ID.unique(1),
-      user.email,
-      user.password
-    );
-    console.log(newUser);
+    await account.create(ID.unique(1), user.email, user.password, user.name);
   } catch (error) {
     console.error(error);
     throw new Error('Failed to create account');

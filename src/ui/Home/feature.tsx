@@ -25,7 +25,6 @@ const Feature = ({
         <p className="text-base text-[#555]">
           {description.split(' ').map((word, idx) => {
             const isHighlighted = highlightableTexts.includes(word);
-            console.log(word);
             return isHighlighted ? (
               <span
                 key={idx}
