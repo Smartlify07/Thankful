@@ -6,7 +6,7 @@ import Button from '../button';
 import { signinSchema } from '../../validation/authValidationSchema';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
-import { login } from '../../redux/features/auth/authSlice';
+import { googleLogin, login } from '../../redux/features/auth/authSlice';
 import { useNavigate } from 'react-router';
 
 const SigninForm = () => {
@@ -17,9 +17,13 @@ const SigninForm = () => {
     password: '',
   };
 
-  const handleSubmit = async (values: FormValues) => {
+  const handleLogin = async (values: FormValues) => {
     await dispatch(login(values)).unwrap();
     navigate('/dashboard');
+  };
+
+  const handleGoogleAuth = async () => {
+    await dispatch(googleLogin());
   };
 
   const labelClassName =
@@ -37,7 +41,7 @@ const SigninForm = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={signinSchema}
-          onSubmit={handleSubmit}
+          onSubmit={handleLogin}
         >
           <Form className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
@@ -91,6 +95,7 @@ const SigninForm = () => {
             <hr className="border w-6/12 border-neutral-200" />
           </div>
           <Button
+            onClick={handleGoogleAuth}
             text="Sign in with google"
             className="flex border justify-center flex-row-reverse font-inter font-semibold text-black items-center gap-2 py-2.5 px-4 text-center rounded-md"
           >
