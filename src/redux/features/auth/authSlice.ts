@@ -27,7 +27,11 @@ export const login = createAsyncThunk('auth/login', async (user: User) => {
 
 export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
   try {
-    await account.createOAuth2Session(OAuthProvider.Google);
+    account.createOAuth2Session(
+      OAuthProvider.Google,
+      import.meta.env.VITE_APP_BASE_URL,
+      `${import.meta.env.VITE_APP_BASE_URL}/failed`
+    );
     console.log('success');
   } catch (error) {
     console.error(error);
@@ -38,6 +42,14 @@ export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     await account.deleteSession('current');
     console.log('Success');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const getUser = createAsyncThunk('auth/getUser', async () => {
+  try {
+    return await account.get();
   } catch (error) {
     console.error(error);
   }

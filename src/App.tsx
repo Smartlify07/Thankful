@@ -11,6 +11,7 @@ import AuthLayout from './layout/AuthLayout';
 import Signin from './ui/(auth)/sign-in';
 import { Provider } from 'react-redux';
 import store from './redux/store';
+import NotFound from './pages/NotFound';
 
 function App() {
   const router = createBrowserRouter(
@@ -22,6 +23,7 @@ function App() {
         </Route>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
         </Route>
       </>
     )

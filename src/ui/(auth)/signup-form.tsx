@@ -5,15 +5,13 @@ import { FormValues } from '../../types/types';
 import Button from '../button';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
-import {
-  googleLogin,
-  logout,
-  signup,
-} from '../../redux/features/auth/authSlice';
+import { googleLogin, signup } from '../../redux/features/auth/authSlice';
 import { signupSchema } from '../../validation/authValidationSchema';
+import { useNavigate } from 'react-router';
 
 const SignupForm = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues = {
     name: '',
     email: '',
@@ -22,13 +20,11 @@ const SignupForm = () => {
 
   const handleSignUp = async (values: FormValues): Promise<void> => {
     await dispatch(signup(values)).unwrap();
+    navigate('/dashboard');
   };
 
   const handleGoogleSignUp = async () => {
     await dispatch(googleLogin());
-  };
-  const handleLogout = () => {
-    dispatch(logout());
   };
 
   const labelClassName =
@@ -123,8 +119,6 @@ const SignupForm = () => {
           >
             <FcGoogle size={20} />
           </Button>
-
-          <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>
