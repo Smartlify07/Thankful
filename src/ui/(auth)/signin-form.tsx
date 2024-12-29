@@ -3,21 +3,23 @@ import { FcGoogle } from 'react-icons/fc';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FormValues } from '../../types/types';
 import Button from '../button';
+import { signinSchema } from '../../validation/authValidationSchema';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
-import { signup } from '../../redux/features/auth/authSlice';
-import { signupSchema } from '../../validation/authValidationSchema';
+import { login } from '../../redux/features/auth/authSlice';
+import { useNavigate } from 'react-router';
 
-const SignupForm = () => {
+const SigninForm = () => {
   const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues = {
     email: '',
     password: '',
   };
 
-  const handleSignUp = async (values: FormValues): Promise<void> => {
-    console.log('Submitting form', values);
-    await dispatch(signup(values)).unwrap();
+  const handleSubmit = async (values: FormValues) => {
+    await dispatch(login(values)).unwrap();
+    navigate('/dashboard');
   };
 
   const labelClassName =
@@ -30,12 +32,12 @@ const SignupForm = () => {
     <div className="w-full relative self-start px-3 md:px-10 ">
       <div className="flex flex-col gap-4 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
         <h1 className="text-outer-space mb-1 text-3xl font-medium font-inter">
-          Sign up
+          Sign in
         </h1>
         <Formik
           initialValues={initialValues}
-          validationSchema={signupSchema}
-          onSubmit={handleSignUp}
+          validationSchema={signinSchema}
+          onSubmit={handleSubmit}
         >
           <Form className="flex flex-col gap-4">
             <div className="flex flex-col gap-2">
@@ -56,7 +58,7 @@ const SignupForm = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-2 relative">
+            <div className="flex flex-col gap-2">
               <label className={labelClassName} htmlFor="password">
                 Password
               </label>
@@ -78,7 +80,7 @@ const SignupForm = () => {
               className="bg-lime rounded-md py-2.5 px-2  text-outer-space font-semibold font-inter mt-4"
               type="submit"
             >
-              Sign up
+              Sign in
             </button>
           </Form>
         </Formik>
@@ -89,7 +91,7 @@ const SignupForm = () => {
             <hr className="border w-6/12 border-neutral-200" />
           </div>
           <Button
-            text="Sign up with google"
+            text="Sign in with google"
             className="flex border justify-center flex-row-reverse font-inter font-semibold text-black items-center gap-2 py-2.5 px-4 text-center rounded-md"
           >
             <FcGoogle size={20} />
@@ -100,4 +102,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SigninForm;
