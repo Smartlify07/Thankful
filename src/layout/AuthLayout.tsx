@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router';
-import authImage from '/public/images/auth-bg.jpg';
+import authImage from '/images/auth-bg.jpg';
 
 const AuthLayout = () => {
   return (
@@ -10,7 +10,7 @@ const AuthLayout = () => {
         <h1 className="text-lime absolute top-20 left-6 text-5xl font-medium font-playfair-display z-[1000] italic italice tracking-tight">
           Thankful
         </h1>
-        <h1 className="text-white text-5xl leading-[1.1] z-10 bottom-20 left-7 w-11/12 font-inter tracking-tight absolute font-medium">
+        <h1 className="text-white md:text-4xl lg:text-5xl leading-[1.1] z-10 bottom-20 left-7 w-11/12 font-inter tracking-tight absolute font-medium">
           Start creating those heartfelt thank you messages today!
         </h1>
         <img
