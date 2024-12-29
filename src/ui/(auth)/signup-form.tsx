@@ -5,7 +5,11 @@ import { FormValues } from '../../types/types';
 import Button from '../button';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../../redux/store';
-import { signup } from '../../redux/features/auth/authSlice';
+import {
+  googleLogin,
+  logout,
+  signup,
+} from '../../redux/features/auth/authSlice';
 import { signupSchema } from '../../validation/authValidationSchema';
 
 const SignupForm = () => {
@@ -18,6 +22,13 @@ const SignupForm = () => {
 
   const handleSignUp = async (values: FormValues): Promise<void> => {
     await dispatch(signup(values)).unwrap();
+  };
+
+  const handleGoogleSignUp = async () => {
+    await dispatch(googleLogin());
+  };
+  const handleLogout = () => {
+    dispatch(logout());
   };
 
   const labelClassName =
@@ -106,11 +117,14 @@ const SignupForm = () => {
             <hr className="border w-6/12 border-neutral-200" />
           </div>
           <Button
+            onClick={handleGoogleSignUp}
             text="Sign up with google"
             className="flex border justify-center flex-row-reverse font-inter font-semibold text-black items-center gap-2 py-2.5 px-4 text-center rounded-md"
           >
             <FcGoogle size={20} />
           </Button>
+
+          <button onClick={handleLogout}>Logout</button>
         </div>
       </div>
     </div>

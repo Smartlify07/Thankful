@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { AuthState, User } from '../../../types/types';
 import { account, ID } from '../../../../appwrite/appwriteConfig';
+import { OAuthProvider } from 'appwrite';
 
 export const signup = createAsyncThunk('auth/signup', async (user: User) => {
   try {
@@ -24,6 +25,23 @@ export const login = createAsyncThunk('auth/login', async (user: User) => {
   }
 });
 
+export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
+  try {
+    await account.createOAuth2Session(OAuthProvider.Google);
+    console.log('success');
+  } catch (error) {
+    console.error(error);
+  }
+});
+
+export const logout = createAsyncThunk('auth/logout', async () => {
+  try {
+    await account.deleteSession('current');
+    console.log('Success');
+  } catch (error) {
+    console.error(error);
+  }
+});
 const initialState: AuthState = {
   user: null,
   status: 'idle',
@@ -53,6 +71,26 @@ export const authSlice = createSlice({
         state.status = 'succeeded';
       })
       .addCase(login.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(googleLogin.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(googleLogin.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(googleLogin.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(logout.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(logout.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });
