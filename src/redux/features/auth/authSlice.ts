@@ -16,6 +16,19 @@ export const signup = createAsyncThunk('auth/signup', async (user: User) => {
   }
 });
 
+export const login = createAsyncThunk('auth/login', async (user: User) => {
+  try {
+    const loggedInUser = await account.createEmailPasswordSession(
+      user.email,
+      user.password
+    );
+    return loggedInUser;
+  } catch (error) {
+    console.error(error);
+    throw new Error('Failed to log in');
+  }
+});
+
 const initialState: AuthState = {
   user: null,
   status: 'idle',
@@ -35,6 +48,16 @@ export const authSlice = createSlice({
         state.status = 'succeeded';
       })
       .addCase(signup.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(login.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(login.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

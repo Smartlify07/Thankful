@@ -4,16 +4,22 @@ import { Formik, Form, Field, ErrorMessage } from 'formik';
 import { FormValues } from '../../types/types';
 import Button from '../button';
 import { signinSchema } from '../../validation/authValidationSchema';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../redux/store';
+import { login } from '../../redux/features/auth/authSlice';
+import { useNavigate } from 'react-router';
 
 const SigninForm = () => {
+  const dispatch: AppDispatch = useDispatch();
+  const navigate = useNavigate();
   const initialValues = {
-    name: '',
     email: '',
     password: '',
   };
 
-  const handleSubmit = (values: FormValues) => {
-    console.log('Form Submitted', values);
+  const handleSubmit = async (values: FormValues) => {
+    await dispatch(login(values)).unwrap();
+    navigate('/dashboard');
   };
 
   const labelClassName =
