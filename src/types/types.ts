@@ -8,8 +8,9 @@ export type AuthState = {
   status: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: string | null | undefined;
 };
+
 export type User = {
-  email: string;
-  password: string;
+  email?: string;
+  password?: string;
   name?: string;
 };

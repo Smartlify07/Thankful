@@ -5,7 +5,7 @@ import { OAuthProvider } from 'appwrite';
 
 export const signup = createAsyncThunk('auth/signup', async (user: User) => {
   try {
-    await account.create(ID.unique(1), user.email, user.password, user.name);
+    await account.create(ID.unique(1), user.email!, user.password!, user.name);
   } catch (error) {
     console.error(error);
     throw new Error('Failed to create account');
@@ -15,8 +15,8 @@ export const signup = createAsyncThunk('auth/signup', async (user: User) => {
 export const login = createAsyncThunk('auth/login', async (user: User) => {
   try {
     const loggedInUser = await account.createEmailPasswordSession(
-      user.email,
-      user.password
+      user.email!,
+      user.password!
     );
     return loggedInUser;
   } catch (error) {
@@ -32,7 +32,6 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
       import.meta.env.VITE_APP_BASE_URL,
       `${import.meta.env.VITE_APP_BASE_URL}/failed`
     );
-    console.log('success');
   } catch (error) {
     console.error(error);
   }
@@ -41,7 +40,6 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     await account.deleteSession('current');
-    console.log('Success');
   } catch (error) {
     console.error(error);
   }
@@ -49,11 +47,13 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 
 export const getUser = createAsyncThunk('auth/getUser', async () => {
   try {
-    return await account.get();
+    const user = await account.get();
+    return user;
   } catch (error) {
     console.error(error);
   }
 });
+
 const initialState: AuthState = {
   user: null,
   status: 'idle',
@@ -103,6 +103,17 @@ export const authSlice = createSlice({
         state.status = 'succeeded';
       })
       .addCase(logout.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload as User;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

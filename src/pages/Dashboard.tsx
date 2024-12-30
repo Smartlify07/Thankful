@@ -1,5 +1,5 @@
 const Dashboard = () => {
-  return <main>Dashboard</main>;
+  return <div>Dashboard</div>;
 };
 
 export default Dashboard;
