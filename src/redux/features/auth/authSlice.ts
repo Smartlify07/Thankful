@@ -5,7 +5,13 @@ import { OAuthProvider } from 'appwrite';
 
 export const signup = createAsyncThunk('auth/signup', async (user: User) => {
   try {
-    await account.create(ID.unique(1), user.email!, user.password!, user.name);
+    const newUser = await account.create(
+      ID.unique(1),
+      user.email!,
+      user.password!,
+      user.name
+    );
+    return newUser;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to create account');
@@ -69,7 +75,8 @@ export const authSlice = createSlice({
       .addCase(signup.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(signup.fulfilled, (state) => {
+      .addCase(signup.fulfilled, (state, action) => {
+        state.user = action.payload;
         state.status = 'succeeded';
       })
       .addCase(signup.rejected, (state, action) => {
@@ -79,12 +86,14 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(login.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.user = action.payload as User;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+        state.user = null;
       })
       .addCase(googleLogin.pending, (state) => {
         state.status = 'loading';
