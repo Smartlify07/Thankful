@@ -21,3 +21,9 @@ export type User = {
   prefs?: unknown;
   status?: boolean;
 };
+
+export type Message = {
+  $id?: string;
+  backgroundImage?: string | null;
+  content?: string;
+};

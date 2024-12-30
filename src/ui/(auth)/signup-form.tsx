@@ -1,12 +1,12 @@
 import { FcGoogle } from 'react-icons/fc';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FormValues } from '../../types/types';
+import { FormValues } from '@/types/types';
 import Button from '../button';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
-import { googleLogin, signup } from '../../redux/features/auth/authSlice';
-import { signupSchema } from '../../validation/authValidationSchema';
+import { AppDispatch } from '@/redux/store';
+import { googleLogin, signup } from '@/redux/features/auth/authSlice';
+import { signupSchema } from '@/validation/authValidationSchema';
 import { useNavigate } from 'react-router';
 
 const SignupForm = () => {

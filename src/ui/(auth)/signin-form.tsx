@@ -1,16 +1,12 @@
 import { FcGoogle } from 'react-icons/fc';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FormValues } from '../../types/types';
+import { FormValues } from '@/types/types';
 import Button from '../button';
-import { signinSchema } from '../../validation/authValidationSchema';
+import { signinSchema } from '@/validation/authValidationSchema';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
-import {
-  googleLogin,
-  login,
-  logout,
-} from '../../redux/features/auth/authSlice';
+import { AppDispatch } from '@/redux/store';
+import { googleLogin, login, logout } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router';
 
 const SigninForm = () => {

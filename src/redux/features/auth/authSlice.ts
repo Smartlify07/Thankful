@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthState, User } from '../../../types/types';
-import { account, ID } from '../../../../appwrite/appwriteConfig';
+import { AuthState, User } from '@/types/types';
+import { account, ID } from '@/appwrite/appwriteConfig';
 import { OAuthProvider } from 'appwrite';
 
 export const signup = createAsyncThunk('auth/signup', async (user: User) => {

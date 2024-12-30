@@ -1,4 +1,4 @@
-import { featuresData } from '../../constants';
+import { featuresData } from '@/constants';
 import Feature from './feature';
 
 const Features = () => {
