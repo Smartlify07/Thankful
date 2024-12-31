@@ -46,6 +46,7 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     await account.deleteSession('current');
+    window.location.replace('/signin');
   } catch (error) {
     console.error(error);
   }
