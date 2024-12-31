@@ -24,24 +24,24 @@ const Dashboard = () => {
   }, [dispatch]);
 
   return (
-    <main className="flex flex-col py-6  border min-h-screen font-inter bg-[#fafafa]">
-      <div className="flex flex-col gap-6 2xl:max-w-[1440px] px-10 ">
+    <main className="flex flex-col py-6  border relative min-h-screen font-inter bg-[#fafafa]">
+      <div className="flex flex-col gap-6  2xl:max-w-[1440px] px-5 md:px-10 ">
         <TopNav name={user?.name} />
         <header className="flex items-center justify-between">
           <h1 className="text-xl font-medium font-inter">Your Messages</h1>
           <Button
             onClick={toggleModal}
             initial={{
-              background: '#115e60',
+              background: '#c8ef3a',
             }}
             whileHover={{
-              background: '#115e59',
+              background: '#a0bf2e',
             }}
             transition={{
               duration: 0.2,
             }}
             text="Create"
-            className="rounded-md py-3 px-5 text-base font-poppins text-white flex items-center gap-2 font-medium"
+            className="rounded-md py-3 px-5  text-base font-poppins text-black flex items-center gap-2 font-medium"
           >
             <FaPlus />
           </Button>
