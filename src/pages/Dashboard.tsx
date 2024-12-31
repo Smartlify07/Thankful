@@ -28,7 +28,7 @@ const Dashboard = () => {
       <div className="flex flex-col gap-6  2xl:max-w-[1440px] px-5 md:px-10 ">
         <TopNav name={user?.name} />
         <header className="flex items-center justify-between">
-          <h1 className="text-xl font-medium font-inter">Your Messages</h1>
+          <h1 className="text-xl font-medium font-inter">Your Library</h1>
           <Button
             onClick={toggleModal}
             initial={{
@@ -41,17 +41,21 @@ const Dashboard = () => {
               duration: 0.2,
             }}
             text="Create"
-            className="rounded-md py-3 px-5  text-base font-poppins text-black flex items-center gap-2 font-medium"
+            className="rounded-md py-3 px-5 text-base font-poppins text-black flex items-center gap-2 font-medium"
           >
             <FaPlus />
           </Button>
         </header>
-        <Messages />
+        {user && <Messages user={user!} />}
       </div>
 
       <AnimatePresence mode="popLayout">
         {isModalOpen && (
-          <CreateMessage toggleModal={toggleModal} isModalOpen={isModalOpen} />
+          <CreateMessage
+            user_id={user?.$id}
+            toggleModal={toggleModal}
+            isModalOpen={isModalOpen}
+          />
         )}
       </AnimatePresence>
     </main>

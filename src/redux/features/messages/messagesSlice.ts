@@ -2,6 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { database, ID } from '@/appwrite/appwriteConfig';
 import { DATABASE_ID, MESSAGE_COLLECTION_ID } from '@/constants';
 import { Message } from '@/types/types';
+import { Query } from 'appwrite';
 
 type MessagesState = {
   messages: Message[];
@@ -17,10 +18,13 @@ const initialState: MessagesState = {
 
 export const getMessages = createAsyncThunk(
   'messages/getMessages',
-  async (_, thunkAPI) => {
+  async (user_id: string, thunkAPI) => {
     try {
-      return (await database.listDocuments(DATABASE_ID, MESSAGE_COLLECTION_ID))
-        .documents;
+      return (
+        await database.listDocuments(DATABASE_ID, MESSAGE_COLLECTION_ID, [
+          Query.equal('user_id', user_id),
+        ])
+      ).documents;
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error);

@@ -1,6 +1,6 @@
 import { createMessage } from '@/redux/features/messages/messagesSlice';
 import { AppDispatch } from '@/redux/store';
-import { Message } from '@/types/types';
+import { Message, User } from '@/types/types';
 import { Field, Form, Formik } from 'formik';
 import { useDispatch } from 'react-redux';
 import { motion } from 'motion/react';
@@ -10,8 +10,13 @@ import { FaX } from 'react-icons/fa6';
 type CreateMessageProps = {
   isModalOpen: boolean;
   toggleModal: () => void;
+  user_id: User['$id'];
 };
-const CreateMessage = ({ isModalOpen, toggleModal }: CreateMessageProps) => {
+const CreateMessage = ({
+  isModalOpen,
+  toggleModal,
+  user_id,
+}: CreateMessageProps) => {
   const initialValues: Message = {
     title: '',
     content: '',
@@ -20,7 +25,7 @@ const CreateMessage = ({ isModalOpen, toggleModal }: CreateMessageProps) => {
   const dispatch: AppDispatch = useDispatch();
 
   const handleCreateMessage = async (values: Message) => {
-    await dispatch(createMessage(values));
+    await dispatch(createMessage({ ...values, user_id }));
     toggleModal();
   };
 
@@ -31,7 +36,13 @@ const CreateMessage = ({ isModalOpen, toggleModal }: CreateMessageProps) => {
       className="w-full z-10 inset-1  absolute
    top-0 left-0 min-h-screen flex items-center justify-center"
     >
-      <Formik initialValues={initialValues} onSubmit={handleCreateMessage}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={(values) => {
+          console.log(values);
+          handleCreateMessage(values);
+        }}
+      >
         <div className="relative">
           <Form className="rounded-md bg-white px-6 py-6 min-h-[300px] w-[300px] md:w-[350px] flex flex-col gap-4">
             <InputField

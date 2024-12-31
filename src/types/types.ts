@@ -10,6 +10,7 @@ export type AuthState = {
 };
 
 export type User = {
+  $id?: string;
   name?: string;
   password?: string;
   email?: string;
@@ -27,4 +28,5 @@ export type Message = {
   title?: string;
   content?: string;
   backgroundImage?: string | null;
+  user_id?: string;
 };

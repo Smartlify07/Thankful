@@ -3,6 +3,8 @@ import { getRandomColor } from '@/utils/getRandomColor';
 import { lightenColor } from '@/utils/lightenColor';
 import { motion } from 'motion/react';
 import { useState } from 'react';
+import Button from '../button';
+import { FaX } from 'react-icons/fa6';
 
 const Message = ({ content, title }: Message) => {
   const color = getRandomColor();
@@ -16,7 +18,14 @@ const Message = ({ content, title }: Message) => {
           animate={{ opacity: expand ? 1 : 0 }}
           className="w-full z-10 inset-1  absolute
    top-0 left-0 min-h-screen flex items-center justify-center"
-        ></motion.div>
+        >
+          <Button
+            onClick={() => setExpand(false)}
+            className="rounded-full absolute flex items-center justify-center border w-10 h-10 right-2 top-4"
+          >
+            <FaX className="text-white" />
+          </Button>{' '}
+        </motion.div>
       )}
       <motion.div
         onClick={() => {
@@ -24,6 +33,7 @@ const Message = ({ content, title }: Message) => {
         }}
         initial={{
           minHeight: '200px',
+          width: 'auto',
           height: '250px',
           maxHeight: '250px',
           backgroundColor: lighterVersion,
@@ -46,13 +56,13 @@ const Message = ({ content, title }: Message) => {
         className="flex flex-col relative items-start px-3 py-3 gap-3 rounded-lg cursor-pointer shadow-md text-outer-space lg:col-span-1 "
       >
         <h1
-          className={`top-3 w-full text-lg lg:text-3xl font-raleway font-medium ${
+          className={`top-3 w-full text-lg sm:text-xl md:text-2xl font-raleway font-medium ${
             expand ? 'text-center' : ''
           }`}
         >
-          Title {title}
+          {title}
         </h1>
-        <p className="text-lg font-openSans">
+        <p className={`text-lg font-openSans`}>
           {content!.length >= 120
             ? content?.substring(0, 120) + '...'
             : content}
