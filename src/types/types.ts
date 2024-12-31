@@ -24,6 +24,7 @@ export type User = {
 
 export type Message = {
   $id?: string;
-  backgroundImage?: string | null;
+  title?: string;
   content?: string;
+  backgroundImage?: string | null;
 };

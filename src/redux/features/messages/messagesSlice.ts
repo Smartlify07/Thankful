@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { database } from '@/appwrite/appwriteConfig';
+import { database, ID } from '@/appwrite/appwriteConfig';
 import { DATABASE_ID, MESSAGE_COLLECTION_ID } from '@/constants';
 import { Message } from '@/types/types';
 
@@ -28,6 +28,24 @@ export const getMessages = createAsyncThunk(
   }
 );
 
+export const createMessage = createAsyncThunk(
+  'messages/createMessage',
+  async (data: Message, thunkAPI) => {
+    try {
+      const response = await database.createDocument(
+        DATABASE_ID,
+        MESSAGE_COLLECTION_ID,
+        ID.unique(),
+        data
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
@@ -42,6 +60,16 @@ const messagesSlice = createSlice({
         state.messages = action.payload;
       })
       .addCase(getMessages.rejected, (state, action) => {
+        state.error = action.error as string;
+      })
+      .addCase(createMessage.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(createMessage.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.messages.push(action.payload);
+      })
+      .addCase(createMessage.rejected, (state, action) => {
         state.error = action.error as string;
       });
   },
