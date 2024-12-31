@@ -35,7 +35,7 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
   try {
     account.createOAuth2Session(
       OAuthProvider.Google,
-      import.meta.env.VITE_APP_BASE_URL,
+      `${import.meta.env.VITE_APP_BASE_URL}/dashboard`,
       `${import.meta.env.VITE_APP_BASE_URL}/failed`
     );
   } catch (error) {
