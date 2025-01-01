@@ -36,7 +36,6 @@ const MessagePopout = ({
       <motion.div
         initial={{
           minHeight: '80vh',
-          width: '90%',
           backgroundColor: lighterVersion,
           boxShadow:
             'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px',
@@ -45,7 +44,7 @@ const MessagePopout = ({
         animate={{
           bottom: '0vh',
         }}
-        className="flex flex-col relative items-start px-5 py-5 gap-3 rounded-lg shadow-md text-outer-space lg:col-span-1"
+        className="flex flex-col relative w-11/12 items-start px-5 py-5 gap-3 rounded-lg shadow-md text-outer-space lg:col-span-1 2xl:max-w-[1320px]"
       >
         <h1
           className={`top-3 w-full text-lg sm:text-xl md:text-3xl font-raleway font-medium text-center`}
