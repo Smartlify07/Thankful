@@ -3,30 +3,14 @@ import { getRandomColor } from '@/utils/getRandomColor';
 import { lightenColor } from '@/utils/lightenColor';
 import { motion } from 'motion/react';
 import { useState } from 'react';
-import Button from '../button';
-import { FaX } from 'react-icons/fa6';
 
+import MessagePopout from './message-popout';
 const Message = ({ content, title }: Message) => {
   const color = getRandomColor();
   const lighterVersion = lightenColor(color, 60);
   const [expand, setExpand] = useState(false);
   return (
     <>
-      {expand && (
-        <motion.div
-          initial={{ backgroundColor: 'rgb(37,37,37,0.5)', opacity: 0 }}
-          animate={{ opacity: expand ? 1 : 0 }}
-          className="w-full z-10 inset-1  absolute
-   top-0 left-0 min-h-screen flex items-center justify-center"
-        >
-          <Button
-            onClick={() => setExpand(false)}
-            className="rounded-full absolute flex items-center justify-center border w-10 h-10 right-2 top-4"
-          >
-            <FaX className="text-white" />
-          </Button>{' '}
-        </motion.div>
-      )}
       <motion.div
         onClick={() => {
           setExpand(true);
@@ -42,23 +26,12 @@ const Message = ({ content, title }: Message) => {
         }}
         whileHover={{
           boxShadow: 'rgba(0, 0, 0, 0.1) 0px 10px 20px -1px',
-          scale: expand ? 1 : 1.02,
-        }}
-        animate={{
-          minHeight: expand ? '80vh' : '',
-          width: expand ? '90%' : '',
-          position: expand ? 'absolute' : 'relative',
-          top: expand ? '10%' : '',
-          left: expand ? '5%' : '',
-          zIndex: expand ? 100 : '',
-          padding: expand ? '40px 20px' : '',
+          scale: 1.02,
         }}
         className="flex flex-col relative items-start px-3 py-3 gap-3 rounded-lg cursor-pointer shadow-md text-outer-space lg:col-span-1 "
       >
         <h1
-          className={`top-3 w-full text-lg sm:text-xl md:text-2xl font-raleway font-medium ${
-            expand ? 'text-center' : ''
-          }`}
+          className={`top-3 w-full text-lg sm:text-xl md:text-2xl font-raleway font-medium`}
         >
           {title}
         </h1>
@@ -68,6 +41,15 @@ const Message = ({ content, title }: Message) => {
             : content}
         </p>
       </motion.div>
+
+      {expand && (
+        <MessagePopout
+          title={title}
+          content={content}
+          expand={expand}
+          setExpand={setExpand}
+        />
+      )}
     </>
   );
 };
