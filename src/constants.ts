@@ -28,6 +28,3 @@ export const featuresData = [
     highlightableTexts: ['unique', 'designs', 'message'],
   },
 ];
-
-export const DATABASE_ID = '6771cbb100358ba1b927';
-export const MESSAGE_COLLECTION_ID = '67729cab001e3cc7762f';
