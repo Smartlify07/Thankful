@@ -1,25 +1,46 @@
 import { FcGoogle } from 'react-icons/fc';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FormValues } from '../../types/types';
+import { FormValues } from '@/types/types';
 import Button from '../button';
-import { signinSchema } from '../../validation/authValidationSchema';
+import { signinSchema } from '@/validation/authValidationSchema';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
-import { googleLogin, login } from '../../redux/features/auth/authSlice';
+import { AppDispatch } from '@/redux/store';
+import { googleLogin, login } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
 
 const SigninForm = () => {
   const dispatch: AppDispatch = useDispatch();
+
   const navigate = useNavigate();
+
   const initialValues = {
     email: '',
     password: '',
   };
 
   const handleLogin = async (values: FormValues) => {
-    await dispatch(login(values)).unwrap();
-    navigate('/dashboard');
+    try {
+      await dispatch(login(values)).unwrap();
+      navigate('/library');
+    } catch (error) {
+      let message;
+      if (isErrorWithMessage(error)) {
+        message = error.message;
+      }
+      toast.error(message, {
+        hideProgressBar: true,
+
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+    }
   };
 
   const handleGoogleAuth = async () => {

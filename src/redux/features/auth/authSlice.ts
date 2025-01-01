@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { AuthState, User } from '../../../types/types';
-import { account, ID } from '../../../../appwrite/appwriteConfig';
+import { AuthState, User } from '@/types/types';
+import { account, ID } from '@/appwrite/appwriteConfig';
 import { OAuthProvider } from 'appwrite';
 
 export const signup = createAsyncThunk('auth/signup', async (user: User) => {
   try {
-    await account.create(ID.unique(1), user.email, user.password, user.name);
+    const newUser = await account.create(
+      ID.unique(1),
+      user.email!,
+      user.password!,
+      user.name
+    );
+    return newUser;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to create account');
@@ -15,9 +21,10 @@ export const signup = createAsyncThunk('auth/signup', async (user: User) => {
 export const login = createAsyncThunk('auth/login', async (user: User) => {
   try {
     const loggedInUser = await account.createEmailPasswordSession(
-      user.email,
-      user.password
+      user.email!,
+      user.password!
     );
+    console.log(loggedInUser);
     return loggedInUser;
   } catch (error) {
     console.error(error);
@@ -29,10 +36,9 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
   try {
     account.createOAuth2Session(
       OAuthProvider.Google,
-      import.meta.env.VITE_APP_BASE_URL,
+      `${import.meta.env.VITE_APP_BASE_URL}/library`,
       `${import.meta.env.VITE_APP_BASE_URL}/failed`
     );
-    console.log('success');
   } catch (error) {
     console.error(error);
   }
@@ -41,7 +47,7 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
 export const logout = createAsyncThunk('auth/logout', async () => {
   try {
     await account.deleteSession('current');
-    console.log('Success');
+    window.location.replace('/signin');
   } catch (error) {
     console.error(error);
   }
@@ -49,11 +55,13 @@ export const logout = createAsyncThunk('auth/logout', async () => {
 
 export const getUser = createAsyncThunk('auth/getUser', async () => {
   try {
-    return await account.get();
+    const user = await account.get();
+    return user;
   } catch (error) {
     console.error(error);
   }
 });
+
 const initialState: AuthState = {
   user: null,
   status: 'idle',
@@ -69,7 +77,8 @@ export const authSlice = createSlice({
       .addCase(signup.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(signup.fulfilled, (state) => {
+      .addCase(signup.fulfilled, (state, action) => {
+        state.user = action.payload;
         state.status = 'succeeded';
       })
       .addCase(signup.rejected, (state, action) => {
@@ -79,12 +88,14 @@ export const authSlice = createSlice({
       .addCase(login.pending, (state) => {
         state.status = 'loading';
       })
-      .addCase(login.fulfilled, (state) => {
+      .addCase(login.fulfilled, (state, action) => {
         state.status = 'succeeded';
+        state.user = action.payload as User;
       })
       .addCase(login.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+        state.user = null;
       })
       .addCase(googleLogin.pending, (state) => {
         state.status = 'loading';
@@ -103,6 +114,17 @@ export const authSlice = createSlice({
         state.status = 'succeeded';
       })
       .addCase(logout.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
+      })
+      .addCase(getUser.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(getUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload as User;
+      })
+      .addCase(getUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
       });

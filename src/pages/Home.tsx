@@ -1,6 +1,6 @@
-import Features from '../ui/Home/features';
-import Footer from '../ui/Home/footer';
-import Hero from '../ui/Home/hero';
+import Features from '@/ui/Home/features';
+import Footer from '@/ui/Home/footer';
+import Hero from '@/ui/Home/hero';
 
 const Home = () => {
   return (

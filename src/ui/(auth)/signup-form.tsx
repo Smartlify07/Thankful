@@ -1,13 +1,15 @@
 import { FcGoogle } from 'react-icons/fc';
 
 import { Formik, Form, Field, ErrorMessage } from 'formik';
-import { FormValues } from '../../types/types';
+import { FormValues } from '@/types/types';
 import Button from '../button';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../redux/store';
-import { googleLogin, signup } from '../../redux/features/auth/authSlice';
-import { signupSchema } from '../../validation/authValidationSchema';
+import { AppDispatch } from '@/redux/store';
+import { googleLogin, login, signup } from '@/redux/features/auth/authSlice';
+import { signupSchema } from '@/validation/authValidationSchema';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
 
 const SignupForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -19,8 +21,27 @@ const SignupForm = () => {
   };
 
   const handleSignUp = async (values: FormValues): Promise<void> => {
-    await dispatch(signup(values)).unwrap();
-    navigate('/dashboard');
+    try {
+      await dispatch(signup(values)).unwrap();
+      await dispatch(login(values));
+      navigate('/library');
+    } catch (error) {
+      let message;
+      if (isErrorWithMessage(error)) {
+        message = error.message;
+      }
+      toast.error(message, {
+        hideProgressBar: true,
+
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+      console.error(error);
+    }
   };
 
   const handleGoogleSignUp = async () => {
@@ -35,7 +56,7 @@ const SignupForm = () => {
   const errorClassName = 'text-xs font-normal font-poppins text-red-500 -mt-1';
   return (
     <div className="w-full relative self-start px-3 md:px-10 ">
-      <div className="flex flex-col gap-4 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
+      <div className="flex flex-col gap-2 h-lg:gap-4 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
         <h1 className="text-outer-space mb-1 text-3xl font-medium font-inter">
           Sign up
         </h1>
@@ -106,7 +127,7 @@ const SignupForm = () => {
             </button>
           </Form>
         </Formik>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2 h-lg:gap-4">
           <div className="flex items-center gap-1">
             <hr className="border-[0.5px] w-6/12 border-neutral-200" />
             <p className="text-center text-neutral-400 text-sm">OR</p>
