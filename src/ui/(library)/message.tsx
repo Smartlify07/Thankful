@@ -36,9 +36,7 @@ const Message = ({ content, title }: Message) => {
           {title}
         </h1>
         <p className={`text-lg font-openSans`}>
-          {content!.length >= 120
-            ? content?.substring(0, 120) + '...'
-            : content}
+          {content!.length >= 10 ? content?.substring(0, 100) + '...' : content}
         </p>
       </motion.div>
 
