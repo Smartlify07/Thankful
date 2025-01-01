@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-import { getUser, selectUser } from '@/redux/features/auth/authSlice';
-import { AppDispatch } from '@/redux/store';
-import { useDispatch, useSelector } from 'react-redux';
+import { useState } from 'react';
+import { selectUser } from '@/redux/features/auth/authSlice';
+import { useSelector } from 'react-redux';
 import Messages from '@/ui/(library)/messages';
 import TopNav from '@/ui/(library)/top-nav';
 import Button from '@/ui/button';
@@ -10,19 +9,12 @@ import CreateMessage from '@/ui/(library)/create-message';
 import { AnimatePresence } from 'motion/react';
 
 const Library = () => {
-  const dispatch: AppDispatch = useDispatch();
   const user = useSelector(selectUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const toggleModal = () => {
     setIsModalOpen((prevState) => !prevState);
   };
-
-  useEffect(() => {
-    (async () => {
-      await dispatch(getUser());
-    })();
-  }, [dispatch]);
 
   return (
     <main className="flex flex-col py-6  border relative min-h-screen font-inter bg-[#fafafa]">

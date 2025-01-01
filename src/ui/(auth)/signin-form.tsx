@@ -24,7 +24,6 @@ const SigninForm = () => {
   const handleLogin = async (values: FormValues) => {
     try {
       await dispatch(login(values)).unwrap();
-      navigate('/library');
     } catch (error) {
       let message;
       if (isErrorWithMessage(error)) {
@@ -44,7 +43,20 @@ const SigninForm = () => {
   };
 
   const handleGoogleAuth = async () => {
-    await dispatch(googleLogin());
+    if (navigator.cookieEnabled) {
+      await dispatch(googleLogin());
+      navigate('/library');
+    } else {
+      toast.error('You need to enable cookies to use this platform', {
+        hideProgressBar: true,
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+    }
   };
 
   const labelClassName =
