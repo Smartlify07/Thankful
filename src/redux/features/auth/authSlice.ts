@@ -24,7 +24,9 @@ export const login = createAsyncThunk('auth/login', async (user: User) => {
       user.email!,
       user.password!
     );
-    return loggedInUser;
+    const profile = await account.get();
+    console.log(loggedInUser, profile);
+    return profile;
   } catch (error) {
     console.error(error);
     throw new Error('Failed to log in');

@@ -24,7 +24,6 @@ const SigninForm = () => {
   const handleLogin = async (values: FormValues) => {
     try {
       await dispatch(login(values)).unwrap();
-      navigate('/library');
     } catch (error) {
       let message;
       if (isErrorWithMessage(error)) {

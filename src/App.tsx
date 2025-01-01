@@ -29,6 +29,11 @@ function App() {
           <Route path="/signin" element={<Signin />} />
         </Route>
 
+        <Route element={<RootLayout />}>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<NotFound />} />
+        </Route>
+
         <Route element={<LibraryLayout />}>
           <Route
             path="/library"
@@ -38,10 +43,6 @@ function App() {
               </ProtectedRoute>
             }
           />
-        </Route>
-        <Route element={<RootLayout />}>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<NotFound />} />
         </Route>
       </>
     )
