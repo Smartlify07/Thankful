@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { getUser, selectUser } from '@/redux/features/auth/authSlice';
 import { AppDispatch } from '@/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
-import Messages from '@/ui/(dashboard)/messages';
-import TopNav from '@/ui/(dashboard)/top-nav';
+import Messages from '@/ui/(library)/messages';
+import TopNav from '@/ui/(library)/top-nav';
 import Button from '@/ui/button';
 import { FaPlus } from 'react-icons/fa';
-import CreateMessage from '@/ui/(dashboard)/create-message';
+import CreateMessage from '@/ui/(library)/create-message';
 import { AnimatePresence } from 'motion/react';
 
 const Library = () => {

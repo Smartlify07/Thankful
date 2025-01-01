@@ -8,6 +8,8 @@ import { AppDispatch } from '@/redux/store';
 import { googleLogin, login, signup } from '@/redux/features/auth/authSlice';
 import { signupSchema } from '@/validation/authValidationSchema';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
 
 const SignupForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -19,9 +21,27 @@ const SignupForm = () => {
   };
 
   const handleSignUp = async (values: FormValues): Promise<void> => {
-    await dispatch(signup(values)).unwrap();
-    await dispatch(login(values));
-    navigate('/dashboard');
+    try {
+      await dispatch(signup(values)).unwrap();
+      await dispatch(login(values));
+      navigate('/library');
+    } catch (error) {
+      let message;
+      if (isErrorWithMessage(error)) {
+        message = error.message;
+      }
+      toast.error(message, {
+        hideProgressBar: true,
+
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+      console.error(error);
+    }
   };
 
   const handleGoogleSignUp = async () => {
