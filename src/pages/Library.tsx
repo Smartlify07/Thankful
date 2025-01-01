@@ -17,8 +17,8 @@ const Library = () => {
   };
 
   return (
-    <main className="flex flex-col 2xl:items-center py-6  border relative min-h-screen font-inter bg-[#fafafa]">
-      <div className="flex flex-col gap-6  2xl:max-w-[1440px] px-5 md:px-10 ">
+    <main className="flex flex-col  2xl:items-center py-6 relative min-h-screen font-inter bg-[#fafafa]">
+      <div className="flex flex-col gap-6 border border-red-500 2xl:w-[1440px] 2xl:max-w-[1440px] px-5 md:px-10 ">
         <TopNav name={user?.name} />
         <header className="flex items-center justify-between">
           <h1 className="text-xl font-medium font-inter">Your Library</h1>
