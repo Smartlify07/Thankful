@@ -6,12 +6,14 @@ import Button from '../button';
 import { signinSchema } from '@/validation/authValidationSchema';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
-import { googleLogin, login, logout } from '@/redux/features/auth/authSlice';
+import { googleLogin, login } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router';
 
 const SigninForm = () => {
   const dispatch: AppDispatch = useDispatch();
+
   const navigate = useNavigate();
+
   const initialValues = {
     email: '',
     password: '',
@@ -103,7 +105,6 @@ const SigninForm = () => {
           </Button>
         </div>
       </div>
-      <button onClick={() => dispatch(logout())}>Logout</button>
     </div>
   );
 };

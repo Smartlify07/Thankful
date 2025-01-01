@@ -27,6 +27,12 @@ export default {
         hero: 'calc(95vh - 80px)',
         'hero-sm': 'calc(95vh - 120px)',
       },
+
+      screens: {
+        'h-lg': {
+          raw: 'min-height(700px)',
+        },
+      },
     },
   },
   plugins: [],

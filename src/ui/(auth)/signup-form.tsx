@@ -35,7 +35,7 @@ const SignupForm = () => {
   const errorClassName = 'text-xs font-normal font-poppins text-red-500 -mt-1';
   return (
     <div className="w-full relative self-start px-3 md:px-10 ">
-      <div className="flex flex-col gap-4 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
+      <div className="flex flex-col gap-2 h-lg:gap-4 w-full bg-white relative m-auto py-7 px-5 lg:max-w-[450px] ">
         <h1 className="text-outer-space mb-1 text-3xl font-medium font-inter">
           Sign up
         </h1>
@@ -106,7 +106,7 @@ const SignupForm = () => {
             </button>
           </Form>
         </Formik>
-        <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-2 h-lg:gap-4">
           <div className="flex items-center gap-1">
             <hr className="border-[0.5px] w-6/12 border-neutral-200" />
             <p className="text-center text-neutral-400 text-sm">OR</p>
