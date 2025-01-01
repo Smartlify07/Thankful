@@ -39,7 +39,6 @@ const CreateMessage = ({
       <Formik
         initialValues={initialValues}
         onSubmit={(values) => {
-          console.log(values);
           handleCreateMessage(values);
         }}
       >

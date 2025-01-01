@@ -45,7 +45,19 @@ const SignupForm = () => {
   };
 
   const handleGoogleSignUp = async () => {
-    await dispatch(googleLogin());
+    if (navigator.cookieEnabled) {
+      await dispatch(googleLogin());
+    } else {
+      toast.error('You need to enable cookies to use this platform', {
+        hideProgressBar: true,
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+    }
   };
 
   const labelClassName =

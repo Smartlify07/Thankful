@@ -15,6 +15,10 @@ import NotFound from './pages/NotFound';
 import LibraryLayout from './layout/LibraryLayout';
 import Library from './pages/Library';
 import { Slide, ToastContainer } from 'react-toastify';
+import ProtectedRoute from './routes/ProtectedRoutes';
+import { getUser } from './redux/features/auth/authSlice';
+
+store.dispatch(getUser());
 
 function App() {
   const router = createBrowserRouter(
@@ -26,7 +30,14 @@ function App() {
         </Route>
 
         <Route element={<LibraryLayout />}>
-          <Route path="/library" element={<Library />} />
+          <Route
+            path="/library"
+            element={
+              <ProtectedRoute>
+                <Library />
+              </ProtectedRoute>
+            }
+          />
         </Route>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />

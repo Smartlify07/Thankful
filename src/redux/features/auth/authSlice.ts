@@ -24,7 +24,6 @@ export const login = createAsyncThunk('auth/login', async (user: User) => {
       user.email!,
       user.password!
     );
-    console.log(loggedInUser);
     return loggedInUser;
   } catch (error) {
     console.error(error);
@@ -121,8 +120,8 @@ export const authSlice = createSlice({
         state.status = 'loading';
       })
       .addCase(getUser.fulfilled, (state, action) => {
-        state.status = 'succeeded';
         state.user = action.payload as User;
+        state.status = 'succeeded';
       })
       .addCase(getUser.rejected, (state, action) => {
         state.status = 'failed';
