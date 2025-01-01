@@ -18,7 +18,6 @@ const initialState: MessagesState = {
 const MESSAGE_COLLECTION_ID = import.meta.env
   .VITE_APP_APPWRITE_MESSAGES_COLLECTION_ID;
 const DATABASE_ID = import.meta.env.VITE_APP_APPWRITE_DATABASE_ID;
-console.log(MESSAGE_COLLECTION_ID);
 
 export const getMessages = createAsyncThunk(
   'messages/getMessages',

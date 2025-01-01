@@ -20,12 +20,8 @@ export const signup = createAsyncThunk('auth/signup', async (user: User) => {
 
 export const login = createAsyncThunk('auth/login', async (user: User) => {
   try {
-    const loggedInUser = await account.createEmailPasswordSession(
-      user.email!,
-      user.password!
-    );
+    await account.createEmailPasswordSession(user.email!, user.password!);
     const profile = await account.get();
-    console.log(loggedInUser, profile);
     return profile;
   } catch (error) {
     console.error(error);
