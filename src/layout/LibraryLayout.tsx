@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router';
 
-const DashboardLayout = () => {
+const LibraryLayout = () => {
   return (
     <main>
       <Outlet />
@@ -8,4 +8,4 @@ const DashboardLayout = () => {
   );
 };
 
-export default DashboardLayout;
+export default LibraryLayout;

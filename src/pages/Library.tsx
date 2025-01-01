@@ -9,7 +9,7 @@ import { FaPlus } from 'react-icons/fa';
 import CreateMessage from '@/ui/(dashboard)/create-message';
 import { AnimatePresence } from 'motion/react';
 
-const Dashboard = () => {
+const Library = () => {
   const dispatch: AppDispatch = useDispatch();
   const user = useSelector(selectUser);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -17,6 +17,7 @@ const Dashboard = () => {
   const toggleModal = () => {
     setIsModalOpen((prevState) => !prevState);
   };
+
   useEffect(() => {
     (async () => {
       await dispatch(getUser());
@@ -62,4 +63,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default Library;

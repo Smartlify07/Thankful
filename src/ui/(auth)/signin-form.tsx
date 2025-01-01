@@ -8,6 +8,8 @@ import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import { googleLogin, login } from '@/redux/features/auth/authSlice';
 import { useNavigate } from 'react-router';
+import { toast } from 'react-toastify';
+import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
 
 const SigninForm = () => {
   const dispatch: AppDispatch = useDispatch();
@@ -20,8 +22,25 @@ const SigninForm = () => {
   };
 
   const handleLogin = async (values: FormValues) => {
-    await dispatch(login(values)).unwrap();
-    navigate('/dashboard');
+    try {
+      await dispatch(login(values)).unwrap();
+      navigate('/dashboard');
+    } catch (error) {
+      let message;
+      if (isErrorWithMessage(error)) {
+        message = error.message;
+      }
+      toast.error(message, {
+        hideProgressBar: true,
+
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+    }
   };
 
   const handleGoogleAuth = async () => {

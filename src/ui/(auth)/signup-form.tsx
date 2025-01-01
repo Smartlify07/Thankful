@@ -5,7 +5,7 @@ import { FormValues } from '@/types/types';
 import Button from '../button';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
-import { googleLogin, signup } from '@/redux/features/auth/authSlice';
+import { googleLogin, login, signup } from '@/redux/features/auth/authSlice';
 import { signupSchema } from '@/validation/authValidationSchema';
 import { useNavigate } from 'react-router';
 
@@ -20,6 +20,7 @@ const SignupForm = () => {
 
   const handleSignUp = async (values: FormValues): Promise<void> => {
     await dispatch(signup(values)).unwrap();
+    await dispatch(login(values));
     navigate('/dashboard');
   };
 

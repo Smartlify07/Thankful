@@ -12,8 +12,9 @@ import Signin from './ui/(auth)/sign-in';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 import NotFound from './pages/NotFound';
-import DashboardLayout from './layout/DashboardLayout';
-import Dashboard from './pages/Dashboard';
+import LibraryLayout from './layout/LibraryLayout';
+import Library from './pages/Library';
+import { Slide, ToastContainer } from 'react-toastify';
 
 function App() {
   const router = createBrowserRouter(
@@ -24,8 +25,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
         </Route>
 
-        <Route element={<DashboardLayout />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+        <Route element={<LibraryLayout />}>
+          <Route path="/library" element={<Library />} />
         </Route>
         <Route element={<RootLayout />}>
           <Route path="/" element={<Home />} />
@@ -36,6 +37,7 @@ function App() {
   );
   return (
     <Provider store={store}>
+      <ToastContainer position="bottom-right" transition={Slide} />
       <RouterProvider router={router}></RouterProvider>
     </Provider>
   );

@@ -24,6 +24,7 @@ export const login = createAsyncThunk('auth/login', async (user: User) => {
       user.email!,
       user.password!
     );
+    console.log(loggedInUser);
     return loggedInUser;
   } catch (error) {
     console.error(error);
@@ -35,7 +36,7 @@ export const googleLogin = createAsyncThunk('auth/googleLogin', async () => {
   try {
     account.createOAuth2Session(
       OAuthProvider.Google,
-      `${import.meta.env.VITE_APP_BASE_URL}/dashboard`,
+      `${import.meta.env.VITE_APP_BASE_URL}/library`,
       `${import.meta.env.VITE_APP_BASE_URL}/failed`
     );
   } catch (error) {
