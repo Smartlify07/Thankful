@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { database, ID } from '@/appwrite/appwriteConfig';
-import { DATABASE_ID, MESSAGE_COLLECTION_ID } from '@/constants';
 import { Message } from '@/types/types';
 import { Query } from 'appwrite';
 
@@ -15,6 +14,11 @@ const initialState: MessagesState = {
   error: null,
   status: 'idle',
 };
+
+const MESSAGE_COLLECTION_ID = import.meta.env
+  .VITE_APP_APPWRITE_MESSAGES_COLLECTION_ID;
+const DATABASE_ID = import.meta.env.VITE_APP_APPWRITE_DATABASE_ID;
+console.log(MESSAGE_COLLECTION_ID);
 
 export const getMessages = createAsyncThunk(
   'messages/getMessages',
