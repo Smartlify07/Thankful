@@ -4,7 +4,11 @@ import { lightenColor } from '@/utils/lightenColor';
 import { motion } from 'motion/react';
 import { FaX } from 'react-icons/fa6';
 import Button from '../button';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
+import { AppDispatch } from '@/redux/store';
+import { useDispatch } from 'react-redux';
+import { editMessage } from '@/redux/features/messages/messagesSlice';
+import { useDebounce } from '@/hooks/useDebounce';
 
 type MessagePopoutProps = Message & {
   expand: boolean;
@@ -15,10 +19,29 @@ const MessagePopout = ({
   content,
   expand,
   setExpand,
+  $id,
 }: MessagePopoutProps) => {
   const color = getRandomColor();
   const lighterVersion = lightenColor(color, 60);
   // @todo: add prop for color, to prevent change on open
+
+  const [message, setMessage] = useState<Message>({
+    title: title,
+    content: content,
+  });
+
+  const dispatch: AppDispatch = useDispatch();
+
+  const updateMessage = async (title: string, content: string, $id: string) => {
+    await dispatch(
+      editMessage({
+        title,
+        content,
+        $id,
+      })
+    );
+  };
+  const debouncedUpdateMessage = useDebounce(updateMessage, 500);
 
   return (
     <motion.div
@@ -35,7 +58,7 @@ const MessagePopout = ({
       </Button>{' '}
       <motion.div
         initial={{
-          minHeight: '80vh',
+          minHeight: '100vh',
           backgroundColor: lighterVersion,
           boxShadow:
             'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px',
@@ -44,18 +67,29 @@ const MessagePopout = ({
         animate={{
           bottom: '0vh',
         }}
-        className="flex flex-col relative w-11/12 items-start px-5 py-5 gap-3 rounded-lg shadow-md text-outer-space lg:col-span-1 2xl:max-w-[1320px]"
+        className="flex flex-col relative w-8/12 items-start px-16 py-5 gap-10 shadow-md text-outer-space lg:col-span-1 2xl:max-w-[1320px]"
       >
-        <h1
-          className={`top-3 w-full text-lg sm:text-xl md:text-3xl font-raleway font-medium text-center`}
-        >
-          {title}
-        </h1>
-        <p className={`text-lg font-openSans`}>
-          {content!.length >= 120
-            ? content?.substring(0, 120) + '...'
-            : content}
-        </p>
+        <input
+          onChange={async (e) => {
+            setMessage((prevState) => ({
+              ...prevState,
+              title: e.target.value,
+            }));
+            debouncedUpdateMessage(e.target.value, content!, $id!);
+          }}
+          className={`top-3 w-full text-lg sm:text-xl md:text-3xl font-openSans font-medium text-center bg-transparent outline-none focus:outline-none focus:border-none`}
+          value={message.title}
+        />
+        <textarea
+          onChange={(e) => {
+            setMessage((prevState) => ({
+              ...prevState,
+              content: e.target.value,
+            }));
+          }}
+          value={message.content}
+          className={`text-xl bg-transparent w-full flex items-start font-openSans focus:border-none focus:outline-none min-h-[100vh] resize-none`}
+        />
       </motion.div>
     </motion.div>
   );

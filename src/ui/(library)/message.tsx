@@ -5,7 +5,7 @@ import { motion } from 'motion/react';
 import { useState } from 'react';
 
 import MessagePopout from './message-popout';
-const Message = ({ content, title }: Message) => {
+const Message = ({ content, title, $id }: Message) => {
   const color = getRandomColor();
   const lighterVersion = lightenColor(color, 60);
   const [expand, setExpand] = useState(false);
@@ -46,6 +46,7 @@ const Message = ({ content, title }: Message) => {
           content={content}
           expand={expand}
           setExpand={setExpand}
+          $id={$id}
         />
       )}
     </>

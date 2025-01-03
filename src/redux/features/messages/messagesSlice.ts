@@ -53,6 +53,24 @@ export const createMessage = createAsyncThunk(
   }
 );
 
+export const editMessage = createAsyncThunk(
+  'messages/editMessage',
+  async (data: Message, thunkAPI) => {
+    try {
+      const response = await database.updateDocument(
+        DATABASE_ID,
+        MESSAGE_COLLECTION_ID,
+        data.$id!,
+        data
+      );
+      return response;
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
@@ -77,6 +95,27 @@ const messagesSlice = createSlice({
         state.messages.push(action.payload);
       })
       .addCase(createMessage.rejected, (state, action) => {
+        state.error = action.error as string;
+      })
+      .addCase(editMessage.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(editMessage.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        const updatedMessages = state.messages.map((message) => {
+          if (message.$id === action.payload.$id) {
+            return {
+              ...message,
+              title: action.payload.title,
+              content: action.payload.content,
+            };
+          } else {
+            return message;
+          }
+        });
+        state.messages = updatedMessages;
+      })
+      .addCase(editMessage.rejected, (state, action) => {
         state.error = action.error as string;
       });
   },

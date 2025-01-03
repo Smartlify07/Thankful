@@ -29,4 +29,5 @@ export type Message = {
   content?: string;
   backgroundImage?: string | null;
   user_id?: string;
+  documentId?: string;
 };
