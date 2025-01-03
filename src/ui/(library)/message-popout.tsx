@@ -86,6 +86,7 @@ const MessagePopout = ({
               ...prevState,
               content: e.target.value,
             }));
+            debouncedUpdateMessage(title!, e.target.value, $id!);
           }}
           value={message.content}
           className={`text-xl bg-transparent w-full flex items-start font-openSans focus:border-none focus:outline-none min-h-[100vh] resize-none`}

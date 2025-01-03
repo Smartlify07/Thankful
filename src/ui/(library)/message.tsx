@@ -28,15 +28,15 @@ const Message = ({ content, title, $id }: Message) => {
           boxShadow: 'rgba(0, 0, 0, 0.1) 0px 10px 20px -1px',
           scale: 1.02,
         }}
-        className="flex flex-col relative items-start px-3 py-3 gap-3 rounded-lg cursor-pointer shadow-md text-outer-space lg:col-span-1 "
+        className="flex flex-col relative items-start overflow-hidden  px-3 py-5 gap-3 rounded-lg cursor-pointer shadow-md text-outer-space lg:col-span-1 "
       >
         <h1
           className={`top-3 w-full text-lg sm:text-xl md:text-2xl font-raleway font-medium`}
         >
           {title}
         </h1>
-        <p className={`text-lg font-openSans`}>
-          {content!.length >= 10 ? content?.substring(0, 100) + '...' : content}
+        <p className={`text-lg font-openSans h-[300px] overflow-hidden`}>
+          {content}
         </p>
       </motion.div>
 
