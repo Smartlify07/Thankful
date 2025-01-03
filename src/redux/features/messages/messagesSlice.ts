@@ -27,7 +27,7 @@ export const getMessages = createAsyncThunk(
         await database.listDocuments(DATABASE_ID, MESSAGE_COLLECTION_ID, [
           Query.equal('user_id', user_id),
         ])
-      ).documents;
+      ).documents as Message[];
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error);
@@ -45,7 +45,7 @@ export const createMessage = createAsyncThunk(
         ID.unique(),
         data
       );
-      return response;
+      return response as Message;
     } catch (error) {
       console.error(error);
       return thunkAPI.rejectWithValue(error);
@@ -90,10 +90,13 @@ const messagesSlice = createSlice({
       .addCase(createMessage.pending, (state) => {
         state.status = 'pending';
       })
-      .addCase(createMessage.fulfilled, (state, action) => {
-        state.status = 'fulfilled';
-        state.messages.push(action.payload);
-      })
+      .addCase(
+        createMessage.fulfilled,
+        (state, action: { payload: Message }) => {
+          state.status = 'fulfilled';
+          state.messages.push(action.payload as Message);
+        }
+      )
       .addCase(createMessage.rejected, (state, action) => {
         state.error = action.error as string;
       })
