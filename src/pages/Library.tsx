@@ -1,19 +1,49 @@
 import { useState } from 'react';
 import { selectUser } from '@/redux/features/auth/authSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Messages from '@/ui/(library)/messages';
 import TopNav from '@/ui/(library)/top-nav';
 import Button from '@/ui/button';
 import { FaPlus } from 'react-icons/fa';
-import CreateMessage from '@/ui/(library)/create-message';
 import { AnimatePresence } from 'motion/react';
+import { AppDispatch } from '@/redux/store';
+import { createMessage } from '@/redux/features/messages/messagesSlice';
+import MessagePopout from '@/ui/(library)/message-popout';
+import { toast } from 'react-toastify';
+import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
 
 const Library = () => {
   const user = useSelector(selectUser);
+  const dispatch: AppDispatch = useDispatch();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [id, setId] = useState('');
 
   const toggleModal = () => {
     setIsModalOpen((prevState) => !prevState);
+  };
+
+  const handleCreateMessage = async () => {
+    try {
+      const message = await dispatch(
+        createMessage({ title: '', content: '', user_id: user?.$id })
+      );
+      setId((message.payload as { $id: string }).$id);
+    } catch (error) {
+      let errorMessage;
+      if (isErrorWithMessage(error)) {
+        errorMessage = error.message;
+      }
+      toast.error(errorMessage, {
+        hideProgressBar: true,
+
+        style: {
+          backgroundColor: '#fee2e2',
+          color: '#222',
+          border: '1px solid #7f1d1d ',
+          padding: '10px',
+        },
+      });
+    }
   };
 
   return (
@@ -23,7 +53,10 @@ const Library = () => {
         <header className="flex items-center justify-between">
           <h1 className="text-xl font-medium font-inter">Your Library</h1>
           <Button
-            onClick={toggleModal}
+            onClick={() => {
+              toggleModal();
+              handleCreateMessage();
+            }}
             initial={{
               background: '#c8ef3a',
             }}
@@ -44,10 +77,12 @@ const Library = () => {
 
       <AnimatePresence mode="popLayout">
         {isModalOpen && (
-          <CreateMessage
-            user_id={user?.$id}
-            toggleModal={toggleModal}
-            isModalOpen={isModalOpen}
+          <MessagePopout
+            title=""
+            content=""
+            expand={isModalOpen}
+            setExpand={setIsModalOpen}
+            $id={id}
           />
         )}
       </AnimatePresence>
