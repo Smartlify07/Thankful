@@ -71,6 +71,19 @@ export const editMessage = createAsyncThunk(
   }
 );
 
+export const deleteMessage = createAsyncThunk(
+  'messages/deleteMessage',
+  async ($id: string, thunkAPI) => {
+    try {
+      await database.deleteDocument(DATABASE_ID, MESSAGE_COLLECTION_ID, $id);
+      return $id;
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
@@ -119,6 +132,19 @@ const messagesSlice = createSlice({
         state.messages = updatedMessages;
       })
       .addCase(editMessage.rejected, (state, action) => {
+        state.error = action.error as string;
+      })
+      .addCase(deleteMessage.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(deleteMessage.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        const filteredMessages = state.messages.filter(
+          (message) => message.$id !== action.payload
+        );
+        state.messages = filteredMessages;
+      })
+      .addCase(deleteMessage.rejected, (state, action) => {
         state.error = action.error as string;
       });
   },

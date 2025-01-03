@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch } from '@/redux/store';
 import Message from './message';
 import { User } from '@/types/types';
+import { AnimatePresence } from 'motion/react';
 
 type MessagesProps = {
   user: User;
@@ -25,7 +26,9 @@ const Messages = ({ user }: MessagesProps) => {
     <section className="py-6">
       <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4  items-center gap-8 lg:gap-16 ">
         {messages.map((message) => (
-          <Message key={message.$id} {...message} />
+          <AnimatePresence mode="popLayout">
+            <Message key={message.$id} {...message} />
+          </AnimatePresence>
         ))}
       </ul>
     </section>

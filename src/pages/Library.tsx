@@ -35,7 +35,6 @@ const Library = () => {
       }
       toast.error(errorMessage, {
         hideProgressBar: true,
-
         style: {
           backgroundColor: '#fee2e2',
           color: '#222',
@@ -80,8 +79,8 @@ const Library = () => {
           <MessagePopout
             title=""
             content=""
-            expand={isModalOpen}
-            setExpand={setIsModalOpen}
+            isMessageOpen={isModalOpen}
+            setIsMessageOpen={setIsModalOpen}
             $id={id}
           />
         )}
