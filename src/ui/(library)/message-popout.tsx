@@ -47,7 +47,10 @@ const MessagePopout = ({
     <motion.div
       initial={{ backgroundColor: 'rgb(37,37,37,0.5)', opacity: 0 }}
       animate={{ opacity: expand ? 1 : 0 }}
-      className="w-full z-10 absolute
+      exit={{
+        opacity: 0,
+      }}
+      className="w-full z-10 fixed
    top-0 left-0 min-h-screen flex items-center justify-center"
     >
       <Button
@@ -62,14 +65,21 @@ const MessagePopout = ({
           backgroundColor: lighterVersion,
           boxShadow:
             'rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.1) 0px 2px 4px -2px',
-          bottom: '-100vh',
+          translateY: '100%',
         }}
         animate={{
-          bottom: '0vh',
+          translateY: '0%',
+        }}
+        transition={{
+          duration: 0.5,
+        }}
+        exit={{
+          translateY: '100%',
         }}
         className="flex flex-col relative w-8/12 items-start px-16 py-5 gap-10 shadow-md text-outer-space lg:col-span-1 2xl:max-w-[1320px]"
       >
         <input
+          placeholder="Title"
           onChange={async (e) => {
             setMessage((prevState) => ({
               ...prevState,
@@ -77,7 +87,7 @@ const MessagePopout = ({
             }));
             debouncedUpdateMessage(e.target.value, content!, $id!);
           }}
-          className={`top-3 w-full text-lg sm:text-xl md:text-3xl font-openSans font-medium text-center bg-transparent outline-none focus:outline-none focus:border-none`}
+          className={`top-3 w-full text-lg sm:text-xl md:text-3xl font-openSans font-medium text-center bg-transparent outline-none focus:outline-none focus:border-none placeholder:text-neutral-600`}
           value={message.title}
         />
         <textarea
