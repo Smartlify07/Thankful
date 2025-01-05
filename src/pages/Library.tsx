@@ -11,6 +11,7 @@ import { createMessage } from '@/redux/features/messages/messagesSlice';
 import MessagePopout from '@/ui/(library)/message-popout';
 import { toast } from 'react-toastify';
 import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
+import ShareMessage from '@/ui/(library)/share-message';
 
 const Library = () => {
   const user = useSelector(selectUser);
@@ -85,6 +86,7 @@ const Library = () => {
           />
         )}
       </AnimatePresence>
+      <ShareMessage />
     </main>
   );
 };

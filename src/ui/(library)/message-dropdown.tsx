@@ -1,4 +1,8 @@
-import { deleteMessage } from '@/redux/features/messages/messagesSlice';
+import { useShareMessageProvider } from '@/context/ShareMessageProvider';
+import {
+  deleteMessage,
+  getMessageById,
+} from '@/redux/features/messages/messagesSlice';
 import { AppDispatch } from '@/redux/store';
 import { isErrorWithMessage } from '@/utils/isErrorWithMessage';
 import { motion } from 'motion/react';
@@ -28,6 +32,8 @@ const MessageDropdown = forwardRef<HTMLDivElement, MessageDropdownProps>(
     const handleOpenMessage = async () => {
       setIsMessageOpen(true);
     };
+    const { toggleShareMessage, getId } = useShareMessageProvider();
+
     return (
       <motion.div
         ref={ref}
@@ -41,7 +47,14 @@ const MessageDropdown = forwardRef<HTMLDivElement, MessageDropdownProps>(
         }}
       >
         <Option label="Open" action={handleOpenMessage} />
-        <Option label="Share" />
+        <Option
+          label="Share"
+          action={() => {
+            toggleShareMessage();
+            getId($id);
+            dispatch(getMessageById($id));
+          }}
+        />
         <Option
           label="Delete"
           action={handleDeleteMessage}

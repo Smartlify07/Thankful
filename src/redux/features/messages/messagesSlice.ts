@@ -5,12 +5,14 @@ import { Query } from 'appwrite';
 
 type MessagesState = {
   messages: Message[];
+  message: Message;
   error: null | string;
   status: 'idle' | 'pending' | 'fulfilled' | 'rejected';
 };
 
 const initialState: MessagesState = {
   messages: [],
+  message: {},
   error: null,
   status: 'idle',
 };
@@ -18,6 +20,8 @@ const initialState: MessagesState = {
 const MESSAGE_COLLECTION_ID = import.meta.env
   .VITE_APP_APPWRITE_MESSAGES_COLLECTION_ID;
 const DATABASE_ID = import.meta.env.VITE_APP_APPWRITE_DATABASE_ID;
+const IMAGES_COLLECTION_ID = import.meta.env
+  .VITE_APP_APPWRITE_IMAGES_COLLECTION_ID;
 
 export const getMessages = createAsyncThunk(
   'messages/getMessages',
@@ -84,6 +88,34 @@ export const deleteMessage = createAsyncThunk(
   }
 );
 
+export const getMessageById = createAsyncThunk(
+  'messages/getMessageById',
+  async ($id: string, thunkAPI) => {
+    try {
+      return await database.getDocument(
+        DATABASE_ID,
+        MESSAGE_COLLECTION_ID,
+        $id
+      );
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const getImages = createAsyncThunk(
+  'messages/getImages',
+  async (_, thunkAPI) => {
+    try {
+      return await database.listDocuments(DATABASE_ID, IMAGES_COLLECTION_ID);
+    } catch (error) {
+      console.error(error);
+      return thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const messagesSlice = createSlice({
   name: 'messages',
   initialState,
@@ -134,6 +166,16 @@ const messagesSlice = createSlice({
       .addCase(editMessage.rejected, (state, action) => {
         state.error = action.error as string;
       })
+      .addCase(getMessageById.pending, (state) => {
+        state.status = 'pending';
+      })
+      .addCase(getMessageById.fulfilled, (state, action) => {
+        state.status = 'fulfilled';
+        state.message = action.payload;
+      })
+      .addCase(getMessageById.rejected, (state, action) => {
+        state.error = action.error as string;
+      })
       .addCase(deleteMessage.pending, (state) => {
         state.status = 'pending';
       })
@@ -152,6 +194,9 @@ const messagesSlice = createSlice({
 
 export const selectMessages = (state: { messages: MessagesState }) =>
   state.messages.messages;
+
+export const selectMessage = (state: { messages: MessagesState }) =>
+  state.messages.message;
 
 export const selectMessagesError = (state: { messages: MessagesState }) =>
   state.messages.error;
