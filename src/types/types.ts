@@ -1,3 +1,5 @@
+import { Models } from 'appwrite';
+
 export type FormValues = {
   email: string;
   password: string;
@@ -29,5 +31,9 @@ export type Message = {
   content?: string;
   backgroundImage?: string | null;
   user_id?: string;
-  documentId?: string;
+};
+
+export type Image = Models.Document & {
+  $id: string;
+  url: string;
 };

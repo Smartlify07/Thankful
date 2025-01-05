@@ -17,6 +17,7 @@ import Library from './pages/Library';
 import { Slide, ToastContainer } from 'react-toastify';
 import ProtectedRoute from './routes/ProtectedRoutes';
 import { getUser } from './redux/features/auth/authSlice';
+import ShareMessageProvider from './context/ShareMessageProvider';
 
 store.dispatch(getUser());
 
@@ -48,10 +49,12 @@ function App() {
     )
   );
   return (
-    <Provider store={store}>
-      <ToastContainer position="bottom-right" transition={Slide} />
-      <RouterProvider router={router}></RouterProvider>
-    </Provider>
+    <ShareMessageProvider>
+      <Provider store={store}>
+        <ToastContainer position="bottom-right" transition={Slide} />
+        <RouterProvider router={router}></RouterProvider>
+      </Provider>
+    </ShareMessageProvider>
   );
 }
 

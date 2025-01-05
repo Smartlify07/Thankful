@@ -1,9 +1,12 @@
+import ImagesProvider from '@/context/ImagesProvider';
 import { Outlet } from 'react-router';
 
 const LibraryLayout = () => {
   return (
     <main>
-      <Outlet />
+      <ImagesProvider>
+        <Outlet />
+      </ImagesProvider>
     </main>
   );
 };
