@@ -11,7 +11,6 @@ export const fetchImages = async () => {
       await database.listDocuments(DATABASE_ID, IMAGES_COLLECTION_ID)
     ).documents as Image[];
 
-    console.log(images);
     return images;
   } catch (error) {
     let message;

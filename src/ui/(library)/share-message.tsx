@@ -1,7 +1,7 @@
 import { useShareMessageProvider } from '@/context/ShareMessageProvider';
 import { selectMessage } from '@/redux/features/messages/messagesSlice';
 import { AnimatePresence, motion } from 'motion/react';
-import { forwardRef, useCallback, useRef, useState } from 'react';
+import { forwardRef, useCallback, useRef } from 'react';
 import { PiX } from 'react-icons/pi';
 import { useSelector } from 'react-redux';
 import MessagePreview from './message-preview';
@@ -13,7 +13,6 @@ const ShareMessage = forwardRef<HTMLDivElement>(function ShareMessage(_, ref) {
   const { isShareMessageOpen, toggleShareMessage } = useShareMessageProvider();
   const message = useSelector(selectMessage);
   const { images } = useImagesProvider();
-  const [link] = useState<string | null>(null);
   const previewRef = useRef<HTMLDivElement>(null);
   const handleDownloadImage = useCallback(() => {
     toPng(previewRef.current!, { cacheBust: true })
@@ -28,7 +27,6 @@ const ShareMessage = forwardRef<HTMLDivElement>(function ShareMessage(_, ref) {
       });
   }, [previewRef]);
 
-  console.log(link);
   return (
     <AnimatePresence>
       {isShareMessageOpen && (
@@ -58,7 +56,7 @@ const ShareMessage = forwardRef<HTMLDivElement>(function ShareMessage(_, ref) {
             transition={{
               duration: 0.5,
             }}
-            className="bg-white relative  py-6 px-6 right-0  min-h-screen  w-full md:w-5/12  flex flex-col gap-10"
+            className="bg-white relative  py-6 px-6 right-0  min-h-screen  w-full md:w-7/12 lg:w-5/12  flex flex-col gap-10"
           >
             <header className="flex items-center justify-center relative ">
               <h1 className="text-2xl self-center text-center font-medium text-black">
@@ -86,7 +84,7 @@ const ShareMessage = forwardRef<HTMLDivElement>(function ShareMessage(_, ref) {
                 content={message.content!}
               />
             </div>
-            <div className="flex flex-wrap items-center gap-4">
+            <div className="flex items-center justify-center flex-wrap gap-6 lg:gap-10">
               {images.map((image) => (
                 <Image key={image.url} url={image.url} />
               ))}
