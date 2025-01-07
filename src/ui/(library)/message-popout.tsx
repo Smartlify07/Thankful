@@ -104,7 +104,7 @@ const MessagePopout = forwardRef<HTMLDivElement, MessagePopoutProps>(
             id="message"
             cols={4}
             rows={4}
-            className="block p-2.5 w-full min-h-[90vh] whitespace-pre-wrap text-sm text-black bg-transparent rounded-lg border  overflow-y-auto resize-none"
+            className="block p-2.5 w-full min-h-[90vh] whitespace-pre-wrap text-sm text-black bg-transparent rounded-lg focus:outline-none focus:border-none  overflow-y-auto resize-none"
             placeholder="Write your thoughts here..."
             style={{
               maxHeight: '10rem', // Restrict the maximum height for better mobile experience
