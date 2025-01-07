@@ -72,15 +72,15 @@ const MessagePopout = forwardRef<HTMLDivElement, MessagePopoutProps>(
           exit={{
             translateY: '100%',
           }}
-          className="flex flex-col relative w-8/12 items-start px-16 py-5 gap-10 shadow-md text-outer-space lg:col-span-1 2xl:max-w-[1320px]"
+          className="flex flex-col relative w-full max-w-full md:w-8/12 items-start px-3 py-10 md:px-16 md:py-5 gap-10 shadow-md text-outer-space lg:col-span-1 2xl:max-w-[1320px]"
         >
           <Button
             onClick={() => setIsMessageOpen(false)}
-            className="rounded-full absolute flex items-center justify-center right-6 top-6"
+            className="rounded-full absolute flex items-center justify-center right-2 top-2 md:right-6 md:top-6"
           >
             <PiX size={24} className="text-charcoal-gray" />
           </Button>{' '}
-          <input
+          <textarea
             placeholder="Title"
             onChange={async (e) => {
               setMessage((prevState) => ({
@@ -89,7 +89,7 @@ const MessagePopout = forwardRef<HTMLDivElement, MessagePopoutProps>(
               }));
               debouncedUpdateMessage(e.target.value, message.content!, $id!);
             }}
-            className={`top-3 w-full text-lg sm:text-xl md:text-3xl font-openSans font-medium text-center bg-transparent outline-none focus:outline-none focus:border-none placeholder:text-neutral-600`}
+            className={` w-full bg-transparent  self-center text-xl md:w-full md:text-3xl font-openSans font-medium text-center outline-none resize-none focus:outline-none focus:border-none placeholder:text-neutral-600  min-h-[40px]`}
             value={message.title}
           />
           <textarea
@@ -101,8 +101,15 @@ const MessagePopout = forwardRef<HTMLDivElement, MessagePopoutProps>(
               debouncedUpdateMessage(message.title!, e.target.value, $id!);
             }}
             value={message.content}
-            className={`text-xl bg-transparent w-full flex items-start font-openSans focus:border-none focus:outline-none min-h-[100vh] resize-none`}
-          />
+            id="message"
+            cols={4}
+            rows={4}
+            className="block p-2.5 w-full min-h-[90vh] whitespace-pre-wrap text-sm text-black bg-transparent rounded-lg border  overflow-y-auto resize-none"
+            placeholder="Write your thoughts here..."
+            style={{
+              maxHeight: '10rem', // Restrict the maximum height for better mobile experience
+            }}
+          ></textarea>
         </motion.div>
       </motion.div>
     );

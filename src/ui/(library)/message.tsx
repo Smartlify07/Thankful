@@ -78,11 +78,16 @@ const Message = ({ content, title, $id }: Message) => {
         </div>
 
         <h1
-          className={`top-3 text-lg sm:text-xl md:text-xl font-medium font-poppins w-11/12`}
+          className={`top-3 text-lg sm:text-xl md:text-xl font-medium overflow-hidden font-poppins w-11/12`}
         >
-          {title}
+          {title!.length >= 20 ? title?.substring(0, 20) + '...' : title}
         </h1>
-        <p className={`text-lg font-openSans overflow-hidden`}>{content}</p>
+        <p
+          style={{ whiteSpace: 'initial', wordWrap: 'break-word' }}
+          className={`text-lg whitespace-pre-wrap font-openSans w-full`}
+        >
+          {content!.length >= 60 ? content?.substring(0, 110) + '...' : content}
+        </p>
       </motion.div>
 
       <AnimatePresence mode="popLayout">
